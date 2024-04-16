@@ -3,6 +3,7 @@ import CharityCardTemplate1 from "/charity-card-template-1.svg";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { FaWhatsapp } from "react-icons/fa";
 import { BiDonateHeart } from "react-icons/bi";
+import rupiah from '../../../utils/priceConverter';
 
 const CharityCard = () => {
   const [showDetails, setShowDetails] = useState(false);
@@ -29,7 +30,7 @@ const CharityCard = () => {
         <div className={`charity-progress overflow-hidden transition-all ease-in-out grid ${showDetails ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
           <div className="content overflow-hidden">
             <p>Donated:</p>
-            <p className="text-3xl">0 / Rp 2.000.000,00</p>
+            <p className="text-3xl">{`${rupiah(0)} / ${rupiah(2000000)}`}</p>
             <button className="mt-4 px-3 py-2 border hover:border-violet-700 rounded-lg bg-violet-700 hover:bg-neutral-50 text-neutral-50 hover:text-violet-700 transition-all ease-in-out duration-200 w-fit flex items-center " type="button">
               <BiDonateHeart /> Donate now
             </button>

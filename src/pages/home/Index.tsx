@@ -1,5 +1,5 @@
 import Charities from './Charities';
-import GetToKnow from './GetToKnow';
+import StartCharity from './StartCharity';
 import Hero from './Hero';
 
 const Home = () => {
@@ -7,7 +7,7 @@ const Home = () => {
     <>
       <Hero />
       <Charities />
-      <GetToKnow />
+      <StartCharity />
     </>
    );
 }

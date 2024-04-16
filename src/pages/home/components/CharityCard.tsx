@@ -13,7 +13,7 @@ const CharityCard = () => {
   }
 
   return ( 
-    <div className="charity-card border border-neutral-400 shadow-xl rounded-2xl h-full">
+    <article className="charity-card border border-neutral-400 shadow-xl rounded-2xl h-full">
       <div className="charity-img flex justify-center">
         <img className="w-full" src={CharityCardTemplate1} alt="" />
       </div>
@@ -42,7 +42,7 @@ const CharityCard = () => {
           <span>{showDetails ? "Hide" : "Show"} Details</span>
         </div>
       </div>
-    </div>
+    </article>
    );
 }
  

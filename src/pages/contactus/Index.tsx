@@ -1,8 +1,10 @@
+import Email from './Email';
+
 const ContactUs = () => {
   return ( 
-    <div>
-      CONTACT US CONTENT
-    </div>
+    <>
+      <Email />
+    </>
    );
 }
  

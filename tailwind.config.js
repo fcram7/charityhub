@@ -10,6 +10,7 @@ export default {
         boska: ['"Boska"', "serif"],
         instrument: ['"Instrument Serif"', "serif"],
         redhatdisplay: ['"Red Hat Display"', "sans-serif"],
+        clashGrotesk: ['"Clash Grotesk"', "sans-serif"],
       }
     },
   },

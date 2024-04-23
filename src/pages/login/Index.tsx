@@ -1,8 +1,10 @@
+import LoginForm from './LoginForm';
+
 const Login = () => {
   return ( 
-    <div>
-      LOGIN PAGE CONTENT
-    </div>
+    <>
+      <LoginForm />
+    </>
    );
 }
  

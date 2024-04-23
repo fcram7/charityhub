@@ -6,25 +6,29 @@ import Button from '../../components/Button';
 import toast from 'react-hot-toast';
 
 const RegisterForm = () => {
-  const { email, password, confirmPassword, setCredentials } = userAuthStore();
+  const { name, email, password, confirmPassword, setCredentials } = userAuthStore();
+
+  const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setCredentials(e.currentTarget.value, email, password, confirmPassword);
+  }
 
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setCredentials(e.currentTarget.value, password, confirmPassword);
+    setCredentials(name, e.currentTarget.value, password, confirmPassword);
   }
 
   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setCredentials(email, e.currentTarget.value, confirmPassword);
+    setCredentials(name, email, e.currentTarget.value, confirmPassword);
   }
 
   const handleConfirmPasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setCredentials(email, password, e.currentTarget.value);
+    setCredentials(name, email, password, e.currentTarget.value);
   }
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log(email, password, confirmPassword);
-    
+    console.log(name, email, password, confirmPassword);
+
     return toast.success("Registered Sucessfully!")
   }
   return ( 
@@ -32,11 +36,13 @@ const RegisterForm = () => {
       <div className="login-content h-full w-full flex flex-col items-center justify-center gap-4 lg:max-w-[50rem]">
         <form onSubmit={handleSubmit} className="form flex flex-col gap-4 w-full bg-slate-200 border px-6 py-6 rounded-2xl border-neutral-400 shadow-2xl">
           <h1 className="text-4xl mb-4 text-center font-clashGrotesk font-semibold">Register</h1>
+          <label htmlFor="name">Name</label>
+          <Input type="email" placeholder="Your Name" value={name} onChange={handleNameChange}/>
           <label htmlFor="email">Email</label>
           <Input type="email" placeholder="Email" value={email} onChange={handleEmailChange}/>
           <label htmlFor="password">Password</label>
           <Input type="password" placeholder="Password" value={password} onChange={handlePasswordChange}/>
-          <label htmlFor="password">Confirm Password</label>
+          <label htmlFor="confirmPassword">Confirm Password</label>
           <Input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={handleConfirmPasswordChange}/>
 
           <Button type="submit" text="Register"/>

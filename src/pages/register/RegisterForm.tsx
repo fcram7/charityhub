@@ -13,24 +13,24 @@ interface AxiosError extends Error {
 }
 
 const RegisterForm = () => {
-  const { name, email, password, confirmPassword, setCredentials } = userAuthStore();
+  const { name, email, password, confirmPassword, setName, setEmail, setPassword, setConfirmPassword } = userAuthStore();
 
   const navigate = useNavigate();
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setCredentials(e.currentTarget.value, email, password, confirmPassword);
+    setName(e.currentTarget.value);
   }
 
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setCredentials(name, e.currentTarget.value, password, confirmPassword);
+    setEmail(e.currentTarget.value);
   }
 
   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setCredentials(name, email, e.currentTarget.value, confirmPassword);
+    setPassword(e.currentTarget.value);
   }
 
   const handleConfirmPasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setCredentials(name, email, password, e.currentTarget.value);
+    setConfirmPassword(e.currentTarget.value);
   }
 
   const handleSubmit = async (e: FormEvent) => {
@@ -43,6 +43,10 @@ const RegisterForm = () => {
         await Api.register({ name, email, password });
         toast.success("Registered Sucessfully!");
         navigate("/login");
+        setName(""),
+        setEmail("");
+        setPassword("");
+        setConfirmPassword("");
       } catch (err) {
         const error = err as AxiosError;
         console.error(error);

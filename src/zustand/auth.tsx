@@ -1,14 +1,12 @@
 import { create } from 'zustand';
-
-interface userCredentials {
-  name: string,
-  email: string,
-  password: string,
-  confirmPassword?: string
-}
+import { userCredentials } from '../utils/userCredentials';
 
 interface userCredentialsAction {
-  setCredentials: (email: userCredentials["email"], password: userCredentials["password"], confirmPassword?: userCredentials["confirmPassword"], name?: userCredentials["name"]) => void
+  // setCredentials: (email: userCredentials["email"], password: userCredentials["password"], confirmPassword?: userCredentials["confirmPassword"], name?: userCredentials["name"]) => void,
+  setName: (name: userCredentials["name"]) => void,
+  setEmail: (email: userCredentials["email"]) => void,
+  setPassword: (password: userCredentials["password"]) => void,
+  setConfirmPassword: (confirmPassword: userCredentials["confirmPassword"]) => void,
 }
 
 export const userAuthStore = create<userCredentials & userCredentialsAction>((set) => ({
@@ -16,10 +14,8 @@ export const userAuthStore = create<userCredentials & userCredentialsAction>((se
   email: "",
   password: "",
   confirmPassword: "",
-  setCredentials: (name, email, password, confirmPassword) => set(() => ({
-    name: name,
-    email: email,
-    password: password,
-    confirmPassword: confirmPassword,
-  }))
-}))
+  setName: (name) => set({ name }),
+  setEmail: (email) => set({ email }),
+  setPassword: (password) => set({ password }),
+  setConfirmPassword: (confirmPassword) => set({ confirmPassword }),
+}));

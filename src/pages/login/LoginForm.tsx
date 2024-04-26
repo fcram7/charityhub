@@ -1,23 +1,49 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ChangeEvent, FormEvent } from 'react';
 import { userAuthStore } from '../../zustand/auth';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import { Api } from '../../network/api';
+import toast from 'react-hot-toast';
+
+interface AxiosError extends Error {
+  response?: {
+    message?: string;
+  };
+}
 
 const LoginForm = () => {
-  const { email, password, setCredentials } = userAuthStore();
+  const { email, password, setEmail, setPassword } = userAuthStore();
+  const navigate = useNavigate();
 
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setCredentials(e.currentTarget.value, password);
+    setEmail(e.currentTarget.value);
   }
 
   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setCredentials(email, e.currentTarget.value);
+    setPassword(e.currentTarget.value);
   }
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     e.stopPropagation();
+
+    console.log(email, password);
+
+    try{
+      await Api.login({ email, password });
+      toast.success("Logged in successfully!");
+      navigate("/dashboard");
+      setEmail("");
+      setPassword("");
+    } catch (err) {
+      const error = err as AxiosError;
+      console.error(error);
+      if(error.message) {
+        return toast.error(`Oops! ${error.message}`);
+      }
+      return toast.error(`Oops! There is an error ${error.message}`);
+    }
   }
   
   return ( 

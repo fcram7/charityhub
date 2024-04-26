@@ -35,5 +35,19 @@ export const Api = {
       console.error(err);
       throw err;
     }
+  },
+
+  async login ({ email, password }: userCredentials) {
+    try {
+      const login = await instance.post(ApiEndpoints.LOGIN, {
+        email: email,
+        password: password,
+      });
+
+      return login;
+    } catch (err) {
+      console.error(err);
+      throw err;
+    }
   }
 }

@@ -56,6 +56,7 @@ const LoginForm = () => {
       <Input
         type="email"
         placeholder="Email"
+        name="email"
         value={email}
         onChange={handleEmailChange}
       />
@@ -63,6 +64,7 @@ const LoginForm = () => {
       <Input
         type="password"
         placeholder="Password"
+        name="password"
         value={password}
         onChange={handlePasswordChange}
       />

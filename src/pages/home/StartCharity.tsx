@@ -7,7 +7,7 @@ const StartCharity = () => {
     navigate("/login");
   }
   return ( 
-    <section className="start-charity py-20 lg:py-36 px-[5%] lg:px-[2%] bg-violet-500">
+    <section className="start-charity py-20 lg:py-48 px-[5%] lg:px-[2%] bg-violet-500">
       <h1 className="section-title font-instrument text-center leading-relaxed text-4xl md:text-5xl md:leading-relaxed lg:text-7xl lg:leading-relaxed">
         "The best way to find yourself is to lose yourself in the service of others"
       </h1>

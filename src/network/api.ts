@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from 'axios'
 import { ApiEndpoints } from '../global/api-endpoint'
-import { userCredentials } from '../utils/userCredentials';
+import { userCredentials } from '../utils/stateInterfaces';
 
 interface ErrorResponseData {
   message: string;
@@ -21,7 +21,9 @@ instance.interceptors.response.use((response: AxiosResponse) => {
     return Promise.reject(error.message);
 })
 
+
 export const Api = {
+  //USER AUTH
   async register ({ name, email, password }: userCredentials) {
     try {
       const register = await instance.post(ApiEndpoints.REGISTER, {
@@ -35,6 +37,7 @@ export const Api = {
       console.error(err);
       throw err;
     }
+
   },
 
   async login ({ email, password }: userCredentials) {
@@ -42,6 +45,8 @@ export const Api = {
       const login = await instance.post(ApiEndpoints.LOGIN, {
         email: email,
         password: password,
+      }, {
+        withCredentials: true
       });
 
       return login;

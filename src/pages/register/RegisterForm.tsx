@@ -65,13 +65,13 @@ const RegisterForm = () => {
     <AuthFormContainer handleSubmit={handleSubmit}>
       <h1 className="text-4xl mb-4 text-center font-clashGrotesk font-semibold">Register</h1>
       <label htmlFor="name">Name</label>
-      <Input type="text" placeholder="Your Name" value={name} onChange={handleNameChange}/>
+      <Input type="text" placeholder="Your Name" name="name" value={name} onChange={handleNameChange}/>
       <label htmlFor="email">Email</label>
-      <Input type="email" placeholder="Email" value={email} onChange={handleEmailChange}/>
+      <Input type="email" placeholder="Email" name="email" value={email} onChange={handleEmailChange}/>
       <label htmlFor="password">Password</label>
-      <Input type="password" placeholder="Password" value={password} onChange={handlePasswordChange}/>
+      <Input type="password" placeholder="Password" name="password" value={password} onChange={handlePasswordChange}/>
       <label htmlFor="confirmPassword">Confirm Password</label>
-      <Input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={handleConfirmPasswordChange}/>
+      <Input type="password" placeholder="Confirm Password" name="confirmPassword" value={confirmPassword} onChange={handleConfirmPasswordChange}/>
 
       <Button type="submit" text="Register"/>
 

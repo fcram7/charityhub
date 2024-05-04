@@ -34,7 +34,7 @@ const LoginForm = () => {
     try {
       await Api.login({ email, password });
       toast.success("Logged in successfully!");
-      navigate("/dashboard");
+      navigate(`/${encodeURIComponent(email)}/dashboard`);
       setEmail("");
       setPassword("");
     } catch (err) {

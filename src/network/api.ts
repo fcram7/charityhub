@@ -54,5 +54,33 @@ export const Api = {
       console.error(err);
       throw err;
     }
+  },
+
+  async logout() {
+    try {
+      const logout = await axios.post(ApiEndpoints.LOGOUT, {}, {
+        withCredentials: true
+      });
+
+      return logout;
+    } catch (err) {
+      console.error(err);
+      throw err;
+    }
+  },
+
+  //CHARITIES DATA
+  async getCharities(email: string, token: string) {
+    try{
+      const getCharities = await axios.get(ApiEndpoints.GET_CHARITIES(email), {
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      return getCharities;
+    } catch (err) {
+      console.error(err);
+    }
   }
 }

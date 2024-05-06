@@ -1,8 +1,10 @@
+import Hero from './Hero';
+
 const NotAuthorized = () => {
   return ( 
-    <div>
-      NOT AUTHORIZED
-    </div>
+    <>
+      <Hero />
+    </>
    );
 }
  

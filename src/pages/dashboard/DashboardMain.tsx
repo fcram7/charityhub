@@ -1,9 +1,10 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Key, useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { Api } from '../../network/api';
 import CharityCard from './components/CharityCard';
 import CharityCardContainer from './components/CharityCardContainer';
+import Button from '../../components/Button';
 
 interface charities {
   _id: Key,
@@ -20,8 +21,12 @@ const DashboardMain = () => {
   const { email } = useParams();
   const [charities, setCharities ] = useState<charities[] | null>(null);
   const cookies = Cookies.get("session");
+  const navigate = useNavigate();
 
   useEffect(() => {
+    if(!cookies) {
+      return navigate("/not-authorized")
+    }
     const getCharitiesData = async () => {
       try {
         const charitiesData = await Api.getCharities(email!, cookies!);
@@ -33,17 +38,20 @@ const DashboardMain = () => {
       }
     }
 
-    getCharitiesData()
-  }, [email, cookies]);
+    getCharitiesData();
+  }, [email, cookies, navigate]);
 
   console.log(charities);
   
   return ( 
-    <section className="dashboard-section px-[5%] py-28 bg-slate-100">
+    <section className="dashboard-section px-[5%] py-28 bg-slate-200">
       <h1 className="section-title text-4xl font-bold font-clashGrotesk mb-24">Dashboard</h1>
 
       <div className="dashboard-content">
-        <h1 className="ps-6 font-redhatdisplay text-2xl mb-10">Ongoing Charities</h1>
+        <h1 className="ps-6 font-redhatdisplay text-2xl mb-8">Ongoing Charities</h1>
+        <div className="start-new-charity-button mb-4">
+          <Button type="button" text="Start New Charity" onClick={undefined}/>
+        </div>
         <CharityCardContainer>
           { charities && charities.map((charity, index) => (
             <CharityCard

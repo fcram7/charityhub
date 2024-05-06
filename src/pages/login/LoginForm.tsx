@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { ChangeEvent, FormEvent } from "react";
+import Cookies from "js-cookie";
 import { userAuthStore } from "../../zustand/auth";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
@@ -33,10 +34,17 @@ const LoginForm = () => {
 
     try {
       await Api.login({ email, password });
-      toast.success("Logged in successfully!");
-      navigate(`/${encodeURIComponent(email)}/dashboard`);
-      setEmail("");
-      setPassword("");
+      const cookies = Cookies.get("session");
+      setTimeout(() => {
+        if(cookies) {
+          navigate(`/${encodeURIComponent(email)}/dashboard`);
+          toast.success("Logged in successfully!");
+        } else {
+          navigate("/not-authorized");
+        }
+        setEmail("");
+        setPassword("");
+      }, 100)
     } catch (err) {
       const error = err as AxiosError;
       console.error(error);

@@ -1,5 +1,5 @@
-import axios, { AxiosError, AxiosResponse } from 'axios'
-import { ApiEndpoints } from '../global/api-endpoint'
+import axios, { AxiosError, AxiosResponse } from 'axios';
+import { ApiEndpoints } from '../global/api-endpoint';
 import { userCredentials } from '../utils/stateInterfaces';
 
 interface ErrorResponseData {
@@ -19,7 +19,7 @@ instance.interceptors.response.use((response: AxiosResponse) => {
       throw new Error(error.response.data.message);
     }
     return Promise.reject(error.message);
-})
+});
 
 
 export const Api = {
@@ -46,7 +46,7 @@ export const Api = {
         email: email,
         password: password,
       }, {
-        withCredentials: true
+        withCredentials: true,
       });
 
       return login;

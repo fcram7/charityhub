@@ -6,6 +6,7 @@ import ContactUs from '../pages/contactus/Index';
 import Register from '../pages/register/Index';
 import Dashboard from '../pages/dashboard/Index';
 import NotAuthorized from '../pages/notAuthorized/Index';
+import CreateCharity from '../pages/createCharity/Index';
 
 const RouteHandler = () => {
 
@@ -17,6 +18,7 @@ const RouteHandler = () => {
       <Route path="/register" element={<Register />}/>
       <Route path="/login" element={<Login />}/>
       <Route path="/:email/dashboard" element={<Dashboard />}/>
+      <Route path="/:email/create-charity" element={<CreateCharity />}/>
     </Routes>
    );
 }

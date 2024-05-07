@@ -17,7 +17,8 @@ export interface charityInterface {
   charityName: string,
   charityDescription: string,
   currentFunding: number,
-  targetFunding: number
+  targetFunding: number,
+  ongoing: boolean,
 }
 
 export interface charityInterfaceAction {
@@ -26,4 +27,5 @@ export interface charityInterfaceAction {
   setCharityDescription: (charityDescription: charityInterface["charityDescription"]) => void,
   setCurrentFunding: (currentFunding: charityInterface["currentFunding"]) => void,
   setTargetFunding: (targetFunding: charityInterface["targetFunding"]) => void,
+  setOngoing: (ongoing: charityInterface["ongoing"]) => void,
 }

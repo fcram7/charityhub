@@ -11,10 +11,11 @@ interface charityCardInterface {
   createdAt: string,
   currentFunding: number,
   targetFunding: number,
+  ongoing: boolean
 }
 
 
-const CharityCard = ({ id, charityName, charityDescription, createdBy, createdAt, currentFunding, targetFunding }: charityCardInterface) => {
+const CharityCard = ({ id, charityName, charityDescription, createdBy, createdAt, currentFunding, targetFunding, ongoing }: charityCardInterface) => {
   const [showDetail, setShowDetail] = useState(false)
 
   const showDetailsHandler = () => {
@@ -30,7 +31,7 @@ const CharityCard = ({ id, charityName, charityDescription, createdBy, createdAt
       <p className="current-funding">{rupiah(currentFunding)}</p>
       <p className="target-funding">{rupiah(targetFunding)}</p>
       <p className="charity-status flex gap-1 items-center">
-        <span className="text-green-500"><GoDotFill /></span> Ongoing
+        <span className={`${ongoing? "text-green-500" : "text-red-500"}`}><GoDotFill /></span> {ongoing ? "Ongoing" : "Inactive"}
       </p>
       <div className="text-xl cursor-pointer" onClick={showDetailsHandler}>
         { showDetail ? <IoIosArrowUp /> : <IoIosArrowDown />}

@@ -14,6 +14,7 @@ interface charities {
   createdAt: string,
   current_funding: number,
   target_funding: number,
+  ongoing: boolean,
 }
 
 const DashboardMain = () => {
@@ -41,6 +42,10 @@ const DashboardMain = () => {
     getCharitiesData();
   }, [email, cookies, navigate]);
 
+  const addCharityButtonHandler = () => {
+    navigate(`/${encodeURIComponent(email!)}/create-charity`);
+  }
+
   console.log(charities);
   
   return ( 
@@ -50,7 +55,7 @@ const DashboardMain = () => {
       <div className="dashboard-content">
         <h1 className="ps-6 font-redhatdisplay text-2xl mb-8">Ongoing Charities</h1>
         <div className="start-new-charity-button mb-4">
-          <Button type="button" text="Start New Charity" onClick={undefined}/>
+          <Button type="button" text="Start New Charity" onClick={addCharityButtonHandler}/>
         </div>
         <CharityCardContainer>
           { charities && charities.map((charity, index) => (
@@ -63,6 +68,7 @@ const DashboardMain = () => {
               createdAt={charity.createdAt}
               currentFunding={charity.current_funding}
               targetFunding={charity.target_funding}
+              ongoing={charity.ongoing}
             />
           )) }
         </CharityCardContainer>

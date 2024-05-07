@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { ApiEndpoints } from '../global/api-endpoint';
-import { userCredentials } from '../utils/stateInterfaces';
+import { charityInterface, userCredentials } from '../utils/stateInterfaces';
 
 interface ErrorResponseData {
   message: string;
@@ -81,6 +81,29 @@ export const Api = {
       return getCharities;
     } catch (err) {
       console.error(err);
+    }
+  },
+
+  async createCharities ({ createdBy, charityName, charityDescription, currentFunding, targetFunding, ongoing }: charityInterface, email: string, token: string) {
+    try {
+      const createCharity = await axios.post(ApiEndpoints.CREATE_CHARITY(email), {
+        createdBy,
+        charityName,
+        charityDescription,
+        currentFunding,
+        targetFunding,
+        ongoing,
+      }, {
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      return createCharity;
+    } catch (err) {
+      console.error(err);
+      throw err;
     }
   }
 }

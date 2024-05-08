@@ -37,7 +37,7 @@ const Navbar = () => {
           { !cookie ? (
             <>
               <NavLink link="/">Home</NavLink>
-              <NavLink link="/">About</NavLink>
+              <NavLink link="/about">About</NavLink>
               <NavLink link="/">Charities</NavLink>
               <NavLink link="/contact-us">Contact Us</NavLink>
               <NavLink link="/login">Login</NavLink>

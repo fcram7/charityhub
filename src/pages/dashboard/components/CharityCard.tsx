@@ -23,7 +23,7 @@ const CharityCard = ({ id, charityName, charityDescription, createdBy, createdAt
   }
 
   return ( 
-    <div className="charity-card py-4 flex gap-4 items-center justify-around border-b border-neutral-400 shadow-sm" key={id}>
+    <div className="charity-card p-4 flex flex-col items-start gap-4 md:flex-row md:items-center md:justify-between border-b border-neutral-400 shadow-sm" key={id}>
       <p className="charity-name">{charityName}</p>
       <p className="charity-description">{charityDescription}</p>
       <p className="charity-starter">{createdBy}</p>

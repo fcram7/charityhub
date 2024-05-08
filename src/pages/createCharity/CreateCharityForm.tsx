@@ -1,31 +1,39 @@
 import { ChangeEvent, FormEvent } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import Cookies from "js-cookie";
+
 import CharityFormContainer from '../../components/CharityFormContainer';
 import Input from '../../components/Input';
 import { charitiesAuthStore } from '../../zustand/charities';
-import { useParams } from 'react-router-dom';
 import TextArea from '../../components/TextArea';
 import rupiah from '../../utils/priceConverter';
 import Button from '../../components/Button';
+import { Api } from '../../network/api';
+import toast from 'react-hot-toast';
 
 const CreateCharityForm = () => {
   const { 
+    createdBy,
     charityName,
     charityDescription,
     currentFunding,
     targetFunding,
+    ongoing,
     setCharityName,
     setCharityDescription,
     setTargetFunding,
     setCreatedBy,
   } = charitiesAuthStore();
   const { email } = useParams();
+  const cookies = Cookies.get("session");
+  const navigate = useNavigate();
 
   const charityNameChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setCharityName(e.currentTarget.value);
   }
 
-  const createdByChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setCreatedBy(e.currentTarget.value);
+  const createdByChangeHandler = () => {
+    setCreatedBy(email!);
   }
 
   const currentFundingChangeHandler = () => {
@@ -44,7 +52,19 @@ const CreateCharityForm = () => {
     e.preventDefault();
     e.stopPropagation();
 
+    try {
+      await Api.createCharitiy({ createdBy, charityName, charityDescription, currentFunding, targetFunding, ongoing }, email!, cookies!);
 
+      toast.success("Successfully created new charity!");
+      navigate(`/${encodeURIComponent(email!)}/dashboard`);
+      setCreatedBy("");
+      setCharityName("");
+      setCharityDescription("");
+      setTargetFunding(0);
+    } catch (err) {
+      console.error(err)
+      return toast.error(`Oops! There's an error ${err}`);
+    }
   }
 
   console.log(targetFunding);

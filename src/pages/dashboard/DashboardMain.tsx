@@ -5,13 +5,14 @@ import { Api } from '../../network/api';
 import CharityCard from './components/CharityCard';
 import CharityCardContainer from './components/CharityCardContainer';
 import Button from '../../components/Button';
+import { showFormattedDate } from '../../utils/dateFormatter';
 
 interface charities {
   _id: Key,
   charity_name: string,
   charity_description: string,
   created_by: string,
-  createdAt: string,
+  createdAt: Date,
   current_funding: number,
   target_funding: number,
   ongoing: boolean,
@@ -53,7 +54,7 @@ const DashboardMain = () => {
       <h1 className="section-title text-4xl font-bold font-clashGrotesk mb-24">Dashboard</h1>
 
       <div className="dashboard-content">
-        <h1 className="ps-6 font-redhatdisplay text-2xl mb-8">Ongoing Charities</h1>
+        <h1 className="md:ps-6 font-redhatdisplay text-2xl mb-8">Ongoing Charities</h1>
         <div className="start-new-charity-button mb-4">
           <Button type="button" text="Start New Charity" onClick={addCharityButtonHandler}/>
         </div>
@@ -65,7 +66,7 @@ const DashboardMain = () => {
               charityName={charity.charity_name}
               charityDescription={charity.charity_description}
               createdBy={charity.created_by}
-              createdAt={charity.createdAt}
+              createdAt={showFormattedDate(charity.createdAt)}
               currentFunding={charity.current_funding}
               targetFunding={charity.target_funding}
               ongoing={charity.ongoing}

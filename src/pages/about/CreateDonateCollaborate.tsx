@@ -1,6 +1,6 @@
 import PageSection from '../../components/PageSection';
 
-const CreateCollaborateDonate = () => {
+const CreateDonateCollaborate = () => {
   return ( 
     <PageSection paddingY="py-52" bgColor="bg-slate-100">
       <div className="section-content">
@@ -14,4 +14,4 @@ const CreateCollaborateDonate = () => {
    );
 }
  
-export default CreateCollaborateDonate;
+export default CreateDonateCollaborate;

@@ -22,6 +22,7 @@ const DashboardMain = () => {
   //TEMPORARY LOGOUT
   const { email } = useParams();
   const [charities, setCharities ] = useState<charities[] | null>(null);
+  const [inactiveCharities, setInactiveCharities] = useState<charities[] | null>(null);
   const cookies = Cookies.get("session");
   const navigate = useNavigate();
 
@@ -29,18 +30,31 @@ const DashboardMain = () => {
     if(!cookies) {
       return navigate("/not-authorized")
     }
-    const getCharitiesData = async () => {
+
+    const getOngoingCharitiesData = async () => {
       try {
-        const charitiesData = await Api.getCharities(email!, cookies!);
-        if(charitiesData) {
-          setCharities(charitiesData.data);
+        const ongoingCharitiesData = await Api.getOngoingCharities(email!, cookies!);
+        if(ongoingCharitiesData) {
+          setCharities(ongoingCharitiesData.data);
         }
       } catch (err) {
         console.error(err);
       }
     }
 
-    getCharitiesData();
+    const getInactiveCharitiesData = async () => {
+      try {
+        const inactiveCharitiesData = await Api.getInactiveCharities(email!, cookies!);
+        if(inactiveCharitiesData) {
+          setInactiveCharities(inactiveCharitiesData.data);
+        } 
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    getOngoingCharitiesData();
+    getInactiveCharitiesData();
   }, [email, cookies, navigate]);
 
   const addCharityButtonHandler = () => {
@@ -72,6 +86,23 @@ const DashboardMain = () => {
               ongoing={charity.ongoing}
             />
           )) }
+        </CharityCardContainer>
+
+        <h1 className="md:ps-6 font-redhatdisplay text-2xl my-8">Inactive Charities</h1>
+        <CharityCardContainer>
+          { inactiveCharities && inactiveCharities.map((charity, index) => (
+            <CharityCard
+              key={index}
+              id={charity._id}
+              charityName={charity.charity_name}
+              charityDescription={charity.charity_description}
+              createdBy={charity.created_by}
+              createdAt={showFormattedDate(charity.createdAt)}
+              currentFunding={charity.current_funding}
+              targetFunding={charity.target_funding}
+              ongoing={charity.ongoing}
+            />
+          ))}
         </CharityCardContainer>
       </div>
     </section>

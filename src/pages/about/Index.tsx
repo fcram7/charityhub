@@ -1,5 +1,5 @@
 import AboutCharityhub from './AboutCharityhub';
-import CreateCollaborateDonate from './CreateCollaborateDonate';
+import CreateDonateCollaborate from './CreateDonateCollaborate';
 import Documentations from './Documentations';
 import Hero from './Hero';
 
@@ -9,7 +9,7 @@ const About = () => {
       <Hero />
       <AboutCharityhub />
       <Documentations />
-      <CreateCollaborateDonate />
+      <CreateDonateCollaborate />
     </>
    );
 }

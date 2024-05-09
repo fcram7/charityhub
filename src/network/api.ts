@@ -84,6 +84,34 @@ export const Api = {
     }
   },
 
+  async getOngoingCharities(email: string, token: string) {
+    try {
+      const getOngoingCharities = await axios.get(ApiEndpoints.GET_ONGOING_CHARITIES(email), {
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      return getOngoingCharities;
+    } catch (err) {
+      console.error(err);
+    }
+  },
+
+  async getInactiveCharities(email: string, token: string) {
+    try{
+      const getInactiveCharities = await axios.get(ApiEndpoints.GET_INACTIVE_CHARITIES(email), {
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      return getInactiveCharities;
+    } catch (err) {
+      console.error(err);
+    }
+  },
+
   async createCharitiy ({ charityName, charityDescription, currentFunding, targetFunding, ongoing }: charityInterface, email: string, token: string) {
     try {
       const createCharity = await axios.post(ApiEndpoints.CREATE_CHARITY(email), {

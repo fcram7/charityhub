@@ -6,5 +6,7 @@ export const ApiEndpoints = {
   LOGOUT: `${Config.BASE_URL}/logout`,
   GET_ALL_CHARITIES: `${Config.BASE_URL}/charities`,
   GET_CHARITIES: (email: string) => `${Config.BASE_URL}/charities/${encodeURIComponent(email)}/`,
-  CREATE_CHARITY: (email: string) => `${Config.BASE_URL}/charities/${encodeURIComponent(email)}/create-charity`
+  GET_ONGOING_CHARITIES: (email: string) => `${Config.BASE_URL}/charities/${encodeURIComponent(email)}/ongoing-charities`,
+  GET_INACTIVE_CHARITIES: (email: string) => `${Config.BASE_URL}/charities/${encodeURIComponent(email)}/inactive-charities`,
+  CREATE_CHARITY: (email: string) => `${Config.BASE_URL}/charities/${encodeURIComponent(email)}/create-charity`,
 }

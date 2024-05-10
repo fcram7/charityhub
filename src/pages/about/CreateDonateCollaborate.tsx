@@ -26,10 +26,11 @@ const CreateDonateCollaborate = () => {
       }, {
         scrollTrigger: {
           trigger: '.text',
-          start: 'top 100%',
+          start: 'top 95%',
           end: 'top 60%',
           markers: false,
-          toggleActions: 'play none none reverse',
+          toggleActions: 'play none none none',
+          scrub: 4
         },
         opacity: 1,
         y: 0,

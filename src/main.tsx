@@ -9,7 +9,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <BrowserRouter>
       <Toaster
-        position="bottom-center"
+        position="top-center"
         reverseOrder={true}
       />
       <App />

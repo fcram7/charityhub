@@ -57,7 +57,13 @@ const RegisterForm = () => {
         return toast.error(`Oops! There's an error ${error.message}`);
       }
     } else {
-      return toast.error("Password doesn't match!");
+      return toast.error("Password doesn't match!", {
+        style: {
+          backgroundColor: "red",
+          color: "white",
+          zIndex: 9999
+        }
+      });
     }
   }
 

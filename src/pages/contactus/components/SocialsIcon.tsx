@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { ReactElement } from 'react';
 
 interface socialsIcon {
@@ -8,15 +7,11 @@ interface socialsIcon {
 
 const SocialsIcon = ({ icon, styles }: socialsIcon) => {
   return ( 
-    <motion.div 
-      initial={{ y: 0 }}
-      whileHover={{ y: -10 }}
-      className={styles}
-    >
+    <div className={styles}>
       <a href="#">
         {icon}
       </a>
-    </motion.div>
+    </div>
    );
 }
  

@@ -3,6 +3,7 @@ import { GoDotFill } from 'react-icons/go';
 import rupiah from '../../../utils/priceConverter';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import Button from '../../../components/Button';
+import Roadmap from './Roadmap';
 
 interface charityCardContainer {
   // children: ReactNode,
@@ -64,10 +65,17 @@ const CharityCardContainer = ({ id, charityName, charityDescription, createdBy, 
 
           <div className="roadmap px-4">
             RESERVED FOR ROADMAP
+            <Roadmap />
           </div>
 
           <div className="edit-delete-button-container w-full mt-8 flex gap-2 justify-end">
-            <Button onClick={undefined} type="button" text="Edit"/>
+            {
+              ongoing ? (
+                <Button onClick={undefined} type="button" text="Edit"/>
+              ) : (
+                null
+              )
+            }
             <Button onClick={undefined} type="button" text="Delete"/>
           </div>
         </div>

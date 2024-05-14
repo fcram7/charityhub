@@ -2,7 +2,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Key, useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { Api } from '../../network/api';
-import CharityCard from './components/CharityCard';
+// import CharityCard from './components/CharityCard';
 import CharityCardContainer from './components/CharityCardContainer';
 import Button from '../../components/Button';
 import { showFormattedDate } from '../../utils/dateFormatter';
@@ -72,9 +72,9 @@ const DashboardMain = () => {
         <div className="start-new-charity-button mb-4">
           <Button type="button" text="Start New Charity" onClick={addCharityButtonHandler}/>
         </div>
-        <CharityCardContainer>
-          { charities && charities.map((charity, index) => (
-            <CharityCard
+        {
+          charities && charities.map((charity, index) => (
+            <CharityCardContainer
               key={index}
               id={charity._id}
               charityName={charity.charity_name}
@@ -85,13 +85,13 @@ const DashboardMain = () => {
               targetFunding={charity.target_funding}
               ongoing={charity.ongoing}
             />
-          )) }
-        </CharityCardContainer>
+          )) 
+        }
 
         <h1 className="md:ps-6 font-redhatdisplay text-2xl my-8">Inactive Charities</h1>
-        <CharityCardContainer>
-          { inactiveCharities && inactiveCharities.map((charity, index) => (
-            <CharityCard
+        {
+          inactiveCharities && inactiveCharities.map((charity, index) => (
+            <CharityCardContainer
               key={index}
               id={charity._id}
               charityName={charity.charity_name}
@@ -102,8 +102,8 @@ const DashboardMain = () => {
               targetFunding={charity.target_funding}
               ongoing={charity.ongoing}
             />
-          ))}
-        </CharityCardContainer>
+          )) 
+        }
       </div>
     </section>
    );

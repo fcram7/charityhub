@@ -1,7 +1,7 @@
 interface button {
   type?: "button" | "submit" | undefined,
   text: string,
-  onClick?: () => void;
+  onClick?: () => void | null | undefined;
 }
 
 const Button = ({ type, text, onClick }: button) => {

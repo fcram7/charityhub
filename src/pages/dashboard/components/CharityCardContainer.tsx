@@ -20,9 +20,10 @@ interface charityCardContainer {
     fundingTransferStatus: boolean,
     finishedStatus: boolean
   },
+  editCharityButtonHandler: () => void | null | undefined
 }
 
-const CharityCardContainer = ({ id, charityName, charityDescription, createdBy, createdAt, currentFunding, targetFunding, ongoing, roadmapStatus }: charityCardContainer) => {
+const CharityCardContainer = ({ id, charityName, charityDescription, createdBy, createdAt, currentFunding, targetFunding, ongoing, roadmapStatus, editCharityButtonHandler }: charityCardContainer) => {
   const [showDetail, setShowDetail] = useState(false)
 
   const showDetailsHandler = () => {
@@ -80,7 +81,7 @@ const CharityCardContainer = ({ id, charityName, charityDescription, createdBy, 
           <div className="edit-delete-button-container w-full mt-8 flex gap-2 justify-end">
             {
               ongoing ? (
-                <Button onClick={undefined} type="button" text="Edit"/>
+                <Button onClick={editCharityButtonHandler} type="button" text="Edit"/>
               ) : (
                 null
               )

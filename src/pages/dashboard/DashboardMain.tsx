@@ -67,6 +67,10 @@ const DashboardMain = () => {
     navigate(`/${encodeURIComponent(email!)}/create-charity`);
   }
 
+  const editCharityButtonHandler = (_id: Key) => {
+    navigate(`/${encodeURIComponent(email!)}/${_id}/edit-charity`);
+  }
+
   console.log(charities);
   
   return ( 
@@ -96,6 +100,7 @@ const DashboardMain = () => {
                 fundingTransferStatus: charity.roadmap.fundingTransfer,
                 finishedStatus: charity.roadmap.finished
               }}
+              editCharityButtonHandler={() => editCharityButtonHandler(charity._id)}
             />
           )) 
         }
@@ -119,6 +124,7 @@ const DashboardMain = () => {
                 fundingTransferStatus: charity.roadmap.fundingTransfer,
                 finishedStatus: charity.roadmap.finished
               }}
+              editCharityButtonHandler={() => editCharityButtonHandler(charity._id)}
             />
           )) 
         }

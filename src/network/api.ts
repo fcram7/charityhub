@@ -1,6 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { ApiEndpoints } from '../global/api-endpoint';
 import { charityInterface, userCredentials } from '../utils/stateInterfaces';
+import { Key } from 'react';
 
 interface ErrorResponseData {
   message: string;
@@ -81,6 +82,21 @@ export const Api = {
       return getCharities;
     } catch (err) {
       console.error(err);
+    }
+  },
+
+  async getOneCharity(email: string, charityId: Key, token: string) {
+    try {
+      const getOneCharity = await axios.get(ApiEndpoints.GET_ONE_CHARITY(email, charityId), {
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      return getOneCharity;
+    } catch (err) {
+      console.error(err)
     }
   },
 

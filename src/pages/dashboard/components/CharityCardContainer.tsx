@@ -6,7 +6,6 @@ import Button from '../../../components/Button';
 import Roadmap from './Roadmap';
 
 interface charityCardContainer {
-  // children: ReactNode,
   id: Key,
   charityName: string,
   charityDescription: string,
@@ -14,10 +13,16 @@ interface charityCardContainer {
   createdAt: string,
   currentFunding: number,
   targetFunding: number,
-  ongoing: boolean
+  ongoing: boolean,
+  roadmapStatus: {
+    initiationStatus: boolean,
+    fundingStatus: boolean,
+    fundingTransferStatus: boolean,
+    finishedStatus: boolean
+  },
 }
 
-const CharityCardContainer = ({ id, charityName, charityDescription, createdBy, createdAt, currentFunding, targetFunding, ongoing }: charityCardContainer) => {
+const CharityCardContainer = ({ id, charityName, charityDescription, createdBy, createdAt, currentFunding, targetFunding, ongoing, roadmapStatus }: charityCardContainer) => {
   const [showDetail, setShowDetail] = useState(false)
 
   const showDetailsHandler = () => {
@@ -63,9 +68,13 @@ const CharityCardContainer = ({ id, charityName, charityDescription, createdBy, 
         <div className="charity-detail-content overflow-hidden">
           <p className="text-2xl mb-4">Charity Roadmap:</p>
 
-          <div className="roadmap px-4">
-            RESERVED FOR ROADMAP
-            <Roadmap />
+          <div className="roadmap px-4 mb-4">
+            <Roadmap
+              initiationStatus={roadmapStatus.initiationStatus}
+              fundingStatus={roadmapStatus.fundingStatus}
+              fundingTransferStatus={roadmapStatus.fundingTransferStatus}
+              finishedStatus={roadmapStatus.finishedStatus}
+            />
           </div>
 
           <div className="edit-delete-button-container w-full mt-8 flex gap-2 justify-end">

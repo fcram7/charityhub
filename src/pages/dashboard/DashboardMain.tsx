@@ -16,6 +16,12 @@ interface charities {
   current_funding: number,
   target_funding: number,
   ongoing: boolean,
+  roadmap: {
+    initiation: boolean,
+    funding: boolean,
+    fundingTransfer: boolean,
+    finished: boolean
+  }
 }
 
 const DashboardMain = () => {
@@ -28,7 +34,7 @@ const DashboardMain = () => {
 
   useEffect(() => {
     if(!cookies) {
-      return navigate("/not-authorized")
+      return navigate("/not-authorized");
     }
 
     const getOngoingCharitiesData = async () => {
@@ -84,6 +90,12 @@ const DashboardMain = () => {
               currentFunding={charity.current_funding}
               targetFunding={charity.target_funding}
               ongoing={charity.ongoing}
+              roadmapStatus={{
+                initiationStatus: charity.roadmap.initiation,
+                fundingStatus: charity.roadmap.funding,
+                fundingTransferStatus: charity.roadmap.fundingTransfer,
+                finishedStatus: charity.roadmap.finished
+              }}
             />
           )) 
         }
@@ -101,6 +113,12 @@ const DashboardMain = () => {
               currentFunding={charity.current_funding}
               targetFunding={charity.target_funding}
               ongoing={charity.ongoing}
+              roadmapStatus={{
+                initiationStatus: charity.roadmap.initiation,
+                fundingStatus: charity.roadmap.funding,
+                fundingTransferStatus: charity.roadmap.fundingTransfer,
+                finishedStatus: charity.roadmap.finished
+              }}
             />
           )) 
         }

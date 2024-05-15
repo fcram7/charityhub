@@ -53,7 +53,7 @@ const CreateCharityForm = () => {
     e.stopPropagation();
 
     try {
-      await Api.createCharitiy({ createdBy, charityName, charityDescription, currentFunding, targetFunding, ongoing }, email!, cookies!);
+      await Api.createCharitiy({ createdBy, charityName, charityDescription, currentFunding, targetFunding, ongoing, roadmap: { initiation: true, funding: false, fundingTransfer: false, finished: false } }, email!, cookies!);
 
       toast.success("Successfully created new charity!");
       navigate(`/${encodeURIComponent(email!)}/dashboard`);

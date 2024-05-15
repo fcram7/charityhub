@@ -7,7 +7,6 @@ import Register from '../pages/register/Index';
 import Dashboard from '../pages/dashboard/Index';
 import NotAuthorized from '../pages/notAuthorized/Index';
 import CreateCharity from '../pages/createCharity/Index';
-import About from '../pages/about/Index';
 
 const RouteHandler = () => {
 
@@ -15,7 +14,6 @@ const RouteHandler = () => {
     <Routes>
       <Route path="/not-authorized" element={<NotAuthorized />}/>
       <Route index element={<Home />} />
-      <Route path="/about" element={<About />}/>
       <Route path="/contact-us" element={<ContactUs />}/>
       <Route path="/register" element={<Register />}/>
       <Route path="/login" element={<Login />}/>

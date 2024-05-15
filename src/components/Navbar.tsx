@@ -49,7 +49,6 @@ const Navbar = () => {
           ) : (
             <>
               <NavLink link="/">Home</NavLink>
-              <NavLink link="/">About</NavLink>
               <NavLink link="/">Charities</NavLink>
               <NavLink link="/contact-us">Contact Us</NavLink>
               <Button type="button" onClick={logoutHandler} text="Logout"/>

@@ -19,6 +19,7 @@ export interface charityInterface {
   currentFunding: number,
   targetFunding: number,
   ongoing: boolean,
+  roadmap: object,
 }
 
 export interface charityInterfaceAction {
@@ -28,4 +29,5 @@ export interface charityInterfaceAction {
   setCurrentFunding: (currentFunding: charityInterface["currentFunding"]) => void,
   setTargetFunding: (targetFunding: charityInterface["targetFunding"]) => void,
   setOngoing: (ongoing: charityInterface["ongoing"]) => void,
+  setRoadmap: (roadmap: charityInterface["roadmap"]) => void,
 }

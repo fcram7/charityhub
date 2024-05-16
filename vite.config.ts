@@ -12,4 +12,14 @@ export default defineConfig({
       include: /\.(html|xml|css|json|js|ts|tsx|mjs|svg)$/
     })
   ],
+
+  // optimizeDeps: {
+  //   include: ["react-icons/fa6", "react-icons/rx"]
+  // },
+
+  build: {
+    rollupOptions: {
+      treeshake: "smallest"
+    }
+  },
 })

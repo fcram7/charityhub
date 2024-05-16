@@ -2,7 +2,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Key, useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { Api } from '../../network/api';
-// import CharityCard from './components/CharityCard';
 import CharityCardContainer from './components/CharityCardContainer';
 import Button from '../../components/Button';
 import { showFormattedDate } from '../../utils/dateFormatter';
@@ -25,7 +24,6 @@ interface charities {
 }
 
 const DashboardMain = () => {
-  //TEMPORARY LOGOUT
   const { email } = useParams();
   const [charities, setCharities ] = useState<charities[] | null>(null);
   const [inactiveCharities, setInactiveCharities] = useState<charities[] | null>(null);

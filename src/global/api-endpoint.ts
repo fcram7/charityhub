@@ -1,5 +1,6 @@
-import { Key } from 'react';
 import { Config } from './config';
+
+import { Key } from 'react';
 
 export const ApiEndpoints = {
   REGISTER: `${Config.BASE_URL}/register`,
@@ -11,4 +12,5 @@ export const ApiEndpoints = {
   GET_INACTIVE_CHARITIES: (email: string) => `${Config.BASE_URL}/charities/${encodeURIComponent(email)}/inactive-charities`,
   GET_ONE_CHARITY: (email: string, charityId: Key) => `${Config.BASE_URL}/charities/${encodeURIComponent(email)}/${charityId}`,
   CREATE_CHARITY: (email: string) => `${Config.BASE_URL}/charities/${encodeURIComponent(email)}/create-charity`,
+  EDIT_CHARITY: (email: string, charityId: Key) => `${Config.BASE_URL}/charities/${encodeURIComponent(email)}/${charityId}/edit-charity`,
 }

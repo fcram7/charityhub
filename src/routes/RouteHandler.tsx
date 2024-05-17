@@ -4,12 +4,7 @@ import { lazy, Suspense } from 'react';
 
 const Home = lazy(() => import('../pages/home/Index'));
 const ContactUs = lazy(() => import('../pages/contactus/Index'));
-// const Login = lazy(() => import('../pages/login/Index'));
-// const Register = lazy(() => import('../pages/register/Index'));
-// const Dashboard = lazy(() => import('../pages/dashboard/Index'));
-// const NotAuthorized = lazy(() => import('../pages/notAuthorized/Index'));
-// const CreateCharity = lazy(() => import('../pages/createCharity/Index'));
-// const EditCharity = lazy(() => import('../pages/editCharity/Index'));
+
 import NotAuthorized from '../pages/notAuthorized/Index';
 import Login from '../pages/login/Index';
 import Register from '../pages/register/Index';

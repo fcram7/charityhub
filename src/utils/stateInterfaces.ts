@@ -12,14 +12,21 @@ export interface userCredentialsAction {
   setConfirmPassword: (confirmPassword: userCredentials["confirmPassword"]) => void,
 }
 
+export interface roadmap {
+  initiation?: boolean,
+  funding?: boolean,
+  fundingTransfer?: boolean,
+  finished?: boolean
+}
+
 export interface charityInterface {
-  createdBy: string,
-  charityName: string,
-  charityDescription: string,
-  currentFunding: number,
-  targetFunding: number,
-  ongoing: boolean,
-  roadmap: object,
+  createdBy?: string,
+  charityName?: string,
+  charityDescription?: string,
+  currentFunding?: number,
+  targetFunding?: number,
+  ongoing?: boolean,
+  roadmap?: roadmap
 }
 
 export interface charityInterfaceAction {
@@ -29,5 +36,8 @@ export interface charityInterfaceAction {
   setCurrentFunding: (currentFunding: charityInterface["currentFunding"]) => void,
   setTargetFunding: (targetFunding: charityInterface["targetFunding"]) => void,
   setOngoing: (ongoing: charityInterface["ongoing"]) => void,
-  setRoadmap: (roadmap: charityInterface["roadmap"]) => void,
+  // setRoadmap: (roadmap: charityInterface["roadmap"]) => void,
+  setRoadmapFunding: (funding: roadmap["funding"]) => void,
+  setRoadmapFundingTransfer: (fundingTransfer: roadmap["fundingTransfer"]) => void,
+  setRoadmapFinished: (finished: roadmap["finished"]) => void,
 }

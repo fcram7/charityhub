@@ -10,6 +10,7 @@ import rupiah from '../../utils/priceConverter';
 import Button from '../../components/Button';
 import { Api } from '../../network/api';
 import toast from 'react-hot-toast';
+import BackToDashboard from '../../components/BackToDashboard';
 
 const CreateCharityForm = () => {
   const { 
@@ -67,15 +68,15 @@ const CreateCharityForm = () => {
     }
   }
 
-  console.log(targetFunding);
-
   return ( 
     <CharityFormContainer title="Create Charity" handleSubmit={handleSubmit}>
+      <BackToDashboard email={email!}/>
+      
       <div className="inputs px-[2%] grid grid-cols-2 gap-6">
         <Input type="text" placeholder="Charity Name" name="charityName" value={charityName} onChange={charityNameChangeHandler} />
         <Input type="email" placeholder="Created By" name="createdBy" value={email} onChange={createdByChangeHandler} disabled={true}/>
         <TextArea placeholder="Charity Description" name="charityDescription" value={charityDescription} onChange={charityDescriptionChangeHandler}/> <br></br>
-        <Input type="number" placeholder={`Current Funding: ${rupiah(currentFunding)}`} name="currentFunding" value={undefined} onChange={currentFundingChangeHandler} disabled={true}/>
+        <Input type="number" placeholder={`Current Funding: ${rupiah(currentFunding!)}`} name="currentFunding" value={undefined} onChange={currentFundingChangeHandler} disabled={true}/>
         <Input type="number" placeholder="Target Funding" name="targetFunding" value={undefined} onChange={targetFundingChangeHandler} disabled={false}/>
       </div>
 

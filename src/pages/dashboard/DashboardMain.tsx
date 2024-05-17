@@ -1,10 +1,12 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import { Key, useEffect, useState } from 'react';
-import Cookies from 'js-cookie';
 import { Api } from '../../network/api';
-import CharityCardContainer from './components/CharityCardContainer';
 import Button from '../../components/Button';
 import { showFormattedDate } from '../../utils/dateFormatter';
+
+import { useNavigate, useParams } from 'react-router-dom';
+import { Key, Suspense, lazy, useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
+
+const CharityCardContainer = lazy(() => import("./components/CharityCardContainer"))
 
 interface charities {
   _id: Key,
@@ -80,52 +82,60 @@ const DashboardMain = () => {
         <div className="start-new-charity-button mb-4">
           <Button type="button" text="Start New Charity" onClick={addCharityButtonHandler}/>
         </div>
-        {
-          charities && charities.map((charity, index) => (
-            <CharityCardContainer
-              key={index}
-              id={charity._id}
-              charityName={charity.charity_name}
-              charityDescription={charity.charity_description}
-              createdBy={charity.created_by}
-              createdAt={showFormattedDate(charity.createdAt)}
-              currentFunding={charity.current_funding}
-              targetFunding={charity.target_funding}
-              ongoing={charity.ongoing}
-              roadmapStatus={{
-                initiationStatus: charity.roadmap.initiation,
-                fundingStatus: charity.roadmap.funding,
-                fundingTransferStatus: charity.roadmap.fundingTransfer,
-                finishedStatus: charity.roadmap.finished
-              }}
-              editCharityButtonHandler={() => editCharityButtonHandler(charity._id)}
-            />
-          )) 
-        }
+        <div className="p-6 border border-slate-400 rounded-xl">
+          <Suspense fallback={<div>Loading</div>}>
+            {
+              charities && charities.map((charity, index) => (
+                <CharityCardContainer
+                  key={index}
+                  id={charity._id}
+                  charityName={charity.charity_name}
+                  charityDescription={charity.charity_description}
+                  createdBy={charity.created_by}
+                  createdAt={showFormattedDate(charity.createdAt)}
+                  currentFunding={charity.current_funding}
+                  targetFunding={charity.target_funding}
+                  ongoing={charity.ongoing}
+                  roadmapStatus={{
+                    initiationStatus: charity.roadmap?.initiation,
+                    fundingStatus: charity.roadmap?.funding,
+                    fundingTransferStatus: charity.roadmap?.fundingTransfer,
+                    finishedStatus: charity.roadmap?.finished
+                  }}
+                  editCharityButtonHandler={() => editCharityButtonHandler(charity._id)}
+                />
+              )) 
+            }
+          </Suspense>
+        </div>
 
         <h1 className="md:ps-6 font-redhatdisplay text-2xl my-8">Inactive Charities</h1>
-        {
-          inactiveCharities && inactiveCharities.map((charity, index) => (
-            <CharityCardContainer
-              key={index}
-              id={charity._id}
-              charityName={charity.charity_name}
-              charityDescription={charity.charity_description}
-              createdBy={charity.created_by}
-              createdAt={showFormattedDate(charity.createdAt)}
-              currentFunding={charity.current_funding}
-              targetFunding={charity.target_funding}
-              ongoing={charity.ongoing}
-              roadmapStatus={{
-                initiationStatus: charity.roadmap.initiation,
-                fundingStatus: charity.roadmap.funding,
-                fundingTransferStatus: charity.roadmap.fundingTransfer,
-                finishedStatus: charity.roadmap.finished
-              }}
-              editCharityButtonHandler={() => editCharityButtonHandler(charity._id)}
-            />
-          )) 
-        }
+        <div className="p-6 border border-slate-400 rounded-xl">
+          <Suspense fallback={<div>Loading</div>}>
+            {
+              inactiveCharities ? inactiveCharities.map((charity, index) => (
+                <CharityCardContainer
+                  key={index}
+                  id={charity._id}
+                  charityName={charity.charity_name}
+                  charityDescription={charity.charity_description}
+                  createdBy={charity.created_by}
+                  createdAt={showFormattedDate(charity.createdAt)}
+                  currentFunding={charity.current_funding}
+                  targetFunding={charity.target_funding}
+                  ongoing={charity.ongoing}
+                  roadmapStatus={{
+                    initiationStatus: charity.roadmap.initiation,
+                    fundingStatus: charity.roadmap.funding,
+                    fundingTransferStatus: charity.roadmap.fundingTransfer,
+                    finishedStatus: charity.roadmap.finished
+                  }}
+                  editCharityButtonHandler={() => editCharityButtonHandler(charity._id)}
+                />
+              )) : (<p>No data!</p>) 
+            }
+          </Suspense>
+        </div>
       </div>
     </section>
    );

@@ -1,5 +1,6 @@
-import { create } from 'zustand';
 import { charityInterface, charityInterfaceAction } from '../utils/stateInterfaces';
+
+import { create } from 'zustand';
 
 export const charitiesAuthStore = create<charityInterface & charityInterfaceAction> ((set) => ({
   createdBy: "",
@@ -20,5 +21,7 @@ export const charitiesAuthStore = create<charityInterface & charityInterfaceActi
   setCurrentFunding: (currentFunding) => set({ currentFunding: currentFunding }),
   setTargetFunding: (targetFunding) => set({ targetFunding: targetFunding }),
   setOngoing: (ongoing) => set({ ongoing }),
-  setRoadmap: (roadmap) => set({ roadmap }),
+  setRoadmapFunding: (funding) => set((state) => ({ roadmap: { ...state.roadmap, funding } })),
+  setRoadmapFundingTransfer: (fundingTransfer) => set((state) => ({ roadmap: { ...state.roadmap, fundingTransfer } })),
+  setRoadmapFinished: (finished) => set((state) => ({ roadmap: { ...state.roadmap, finished } })),
 }));

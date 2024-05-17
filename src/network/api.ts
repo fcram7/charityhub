@@ -1,6 +1,7 @@
-import axios, { AxiosError, AxiosResponse } from 'axios';
 import { ApiEndpoints } from '../global/api-endpoint';
 import { charityInterface, userCredentials } from '../utils/stateInterfaces';
+
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import { Key } from 'react';
 
 interface ErrorResponseData {
@@ -145,6 +146,33 @@ export const Api = {
       });
 
       return createCharity;
+    } catch (err) {
+      console.error(err);
+      throw err;
+    }
+  },
+
+  async editCharity({ charityName, charityDescription, targetFunding, roadmap }: charityInterface, email: string, charityId: Key, token: string) {
+    try {
+      const { initiation, funding, fundingTransfer, finished } = roadmap || {};
+      const editCharity = await axios.put(ApiEndpoints.EDIT_CHARITY(email, charityId), {
+        charityName: charityName,
+        charityDescription: charityDescription,
+        targetFunding: targetFunding,
+        roadmap: {
+          initiation: initiation,
+          funding: funding,
+          fundingTransfer: fundingTransfer,
+          finished: finished
+        }
+      }, {
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+
+      return editCharity;
     } catch (err) {
       console.error(err);
       throw err;

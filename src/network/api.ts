@@ -177,5 +177,21 @@ export const Api = {
       console.error(err);
       throw err;
     }
+  },
+
+  async deleteCharity(email: string, charityId: Key, token: string) {
+    try{
+      const deleteCharity = await axios.delete(ApiEndpoints.DELETE_CHARITY(email, charityId), {
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      return deleteCharity;
+    } catch (err) {
+      console.error(err);
+      throw err;
+    }
   }
 }

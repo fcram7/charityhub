@@ -4,6 +4,7 @@ import { lazy, Suspense } from 'react';
 
 const Home = lazy(() => import('../pages/home/Index'));
 const ContactUs = lazy(() => import('../pages/contactus/Index'));
+const Charities = lazy(() => import('../pages/charities/Index'));
 
 import NotAuthorized from '../pages/notAuthorized/Index';
 import Login from '../pages/login/Index';
@@ -20,6 +21,11 @@ const RouteHandler = () => {
         <Route index element={
           <Suspense fallback={<div>Loading</div>}>
             <Home />
+          </Suspense>
+        } />
+        <Route path="charities" element={
+          <Suspense fallback={<div>Loading</div>}>
+            <Charities />
           </Suspense>
         } />
         <Route path="contact-us" element={

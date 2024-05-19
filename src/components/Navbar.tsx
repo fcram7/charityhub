@@ -42,14 +42,14 @@ const Navbar = () => {
           { !cookie ? (
             <>
               <NavLink link="/">Home</NavLink>
-              <NavLink link="/">Charities</NavLink>
+              <NavLink link="/charities">Charities</NavLink>
               <NavLink link="/contact-us">Contact Us</NavLink>
               <NavLink link="/login">Login</NavLink>
             </>
           ) : (
             <>
               <NavLink link="/">Home</NavLink>
-              <NavLink link="/">Charities</NavLink>
+              <NavLink link="/charities">Charities</NavLink>
               <NavLink link="/contact-us">Contact Us</NavLink>
               <Button type="button" onClick={logoutHandler} text="Logout"/>
             </>

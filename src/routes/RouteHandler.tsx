@@ -5,6 +5,7 @@ import { lazy, Suspense } from 'react';
 const Home = lazy(() => import('../pages/home/Index'));
 const ContactUs = lazy(() => import('../pages/contactus/Index'));
 const Charities = lazy(() => import('../pages/charities/Index'));
+const CharityDetail = lazy(() => import('../pages/CharityDetail/Index'));
 
 import NotAuthorized from '../pages/notAuthorized/Index';
 import Login from '../pages/login/Index';
@@ -35,6 +36,14 @@ const RouteHandler = () => {
         }/>
         <Route path="register" element={<Register />}/>
         <Route path="login" element={<Login />}/>
+
+        <Route path="charity/">
+          <Route path=":charityId" element={
+            <Suspense fallback={<div>Loading</div>}>
+              <CharityDetail />
+            </Suspense>
+          }/>
+        </Route>
 
         <Route path=":email/">
           <Route path="dashboard" element={<Dashboard />}/>

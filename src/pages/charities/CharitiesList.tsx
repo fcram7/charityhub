@@ -9,6 +9,7 @@ interface charities {
   _id: Key,
   charity_name: string,
   charity_description: string,
+  charity_location: string,
   created_by: string,
   createdAt: Date,
   current_funding: number,
@@ -42,13 +43,14 @@ const CharitiesList = () => {
   return ( 
     <PageSection paddingY="py-32" bgColor="bg-slate-200">
         <Suspense fallback={<div>Loading</div>} >
-          <div className="charity-content px-20 grid gap-8">
+          <div className="charity-content px-20 grid gap-8 lg:grid-cols-3">
             { charities && charities.map((charity, index) => (
                 <CharityCard
                   key={index}
                   id={charity._id}
                   charityName={charity.charity_name}
                   charityDescription={charity.charity_description}
+                  charityLocation={charity.charity_location}
                   createdBy={charity.created_by}
                   currentFunding={charity.current_funding}
                   targetFunding={charity.target_funding}

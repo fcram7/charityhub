@@ -140,12 +140,13 @@ export const Api = {
     }
   },
 
-  async createCharitiy ({ charityName, charityDescription, currentFunding, targetFunding, ongoing }: charityInterface, email: string, token: string) {
+  async createCharitiy ({ charityName, charityDescription, charityLocation, currentFunding, targetFunding, ongoing }: charityInterface, email: string, token: string) {
     try {
       const createCharity = await axios.post(ApiEndpoints.CREATE_CHARITY(email), {
         createdBy: email,
         charityName,
         charityDescription,
+        charityLocation,
         currentFunding,
         targetFunding,
         ongoing,

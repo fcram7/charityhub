@@ -14,6 +14,7 @@ interface charities {
   _id: Key,
   charity_name: string,
   charity_description: string,
+  charity_location: string,
   created_by: string,
   createdAt: Date,
   current_funding: number,
@@ -121,6 +122,7 @@ const DashboardMain = () => {
                     id={charity._id}
                     charityName={charity.charity_name}
                     charityDescription={charity.charity_description}
+                    charityLocation={charity.charity_location}
                     createdBy={charity.created_by}
                     createdAt={showFormattedDate(charity.createdAt)}
                     currentFunding={charity.current_funding}
@@ -150,6 +152,7 @@ const DashboardMain = () => {
                     id={charity._id}
                     charityName={charity.charity_name}
                     charityDescription={charity.charity_description}
+                    charityLocation={charity.charity_location}
                     createdBy={charity.created_by}
                     createdAt={showFormattedDate(charity.createdAt)}
                     currentFunding={charity.current_funding}

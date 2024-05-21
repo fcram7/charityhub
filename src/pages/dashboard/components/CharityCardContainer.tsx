@@ -10,6 +10,7 @@ interface charityCardContainer {
   id: Key,
   charityName: string,
   charityDescription: string,
+  charityLocation: string,
   createdBy: string,
   createdAt: string,
   currentFunding: number,
@@ -25,7 +26,7 @@ interface charityCardContainer {
   deleteCharityButtonHandler: () => void | null | undefined
 }
 
-const CharityCardContainer = ({ id, charityName, charityDescription, createdBy, createdAt, currentFunding, targetFunding, ongoing, roadmapStatus, editCharityButtonHandler, deleteCharityButtonHandler }: charityCardContainer) => {
+const CharityCardContainer = ({ id, charityName, charityDescription, charityLocation, createdBy, createdAt, currentFunding, targetFunding, ongoing, roadmapStatus, editCharityButtonHandler, deleteCharityButtonHandler }: charityCardContainer) => {
   const [showDetail, setShowDetail] = useState(false)
 
   const showDetailsHandler = () => {
@@ -39,6 +40,7 @@ const CharityCardContainer = ({ id, charityName, charityDescription, createdBy, 
             <tr className="text-left">
               <th>Charity Name</th>
               <th>Charity Description</th>
+              <th>Location</th>
               <th>Created By</th>
               <th>Created At</th>
               <th>Current Funding</th>
@@ -50,6 +52,7 @@ const CharityCardContainer = ({ id, charityName, charityDescription, createdBy, 
             <tr key={id}>
               <td><p className="charity-name">{charityName}</p></td>
               <td><p className="charity-description">{charityDescription}</p></td>
+              <td><p className="charity-location">{charityLocation}</p></td>
               <td><p className="charity-starter">{createdBy}</p></td>
               <td><p className="created-at">{createdAt}</p></td>
               <td><p className="current-funding">{rupiah(currentFunding)}</p></td>

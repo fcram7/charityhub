@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply scroll-smooth
+}
+
+th {
+  @apply w-[250px]
+}
+
+::-webkit-scrollbar {
+  @apply bg-slate-400 w-1
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-600 rounded-xl
+}
+
 .roadmap-item:not(:first-child):before {
   @apply content-[''] bg-slate-400 absolute w-full h-[3px] top-1/3 right-2/4 -translate-y-2/4
 }

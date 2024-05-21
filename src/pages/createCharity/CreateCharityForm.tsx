@@ -17,11 +17,13 @@ const CreateCharityForm = () => {
     createdBy,
     charityName,
     charityDescription,
+    charityLocation,
     currentFunding,
     targetFunding,
     ongoing,
     setCharityName,
     setCharityDescription,
+    setCharityLocation,
     setTargetFunding,
     setCreatedBy,
   } = charitiesAuthStore();
@@ -45,6 +47,10 @@ const CreateCharityForm = () => {
     setCharityDescription(e.currentTarget.value);
   }
 
+  const charityLocationChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setCharityLocation(e.currentTarget.value);
+  }
+
   const targetFundingChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setTargetFunding(e.currentTarget.valueAsNumber);
   }
@@ -54,7 +60,7 @@ const CreateCharityForm = () => {
     e.stopPropagation();
 
     try {
-      await Api.createCharitiy({ createdBy, charityName, charityDescription, currentFunding, targetFunding, ongoing, roadmap: { initiation: true, funding: false, fundingTransfer: false, finished: false } }, email!, cookies!);
+      await Api.createCharitiy({ createdBy, charityName, charityDescription, charityLocation, currentFunding, targetFunding, ongoing, roadmap: { initiation: true, funding: false, fundingTransfer: false, finished: false } }, email!, cookies!);
 
       toast.success("Successfully created new charity!");
       navigate(`/${encodeURIComponent(email!)}/dashboard`);
@@ -76,6 +82,7 @@ const CreateCharityForm = () => {
         <Input type="text" placeholder="Charity Name" name="charityName" value={charityName} onChange={charityNameChangeHandler} />
         <Input type="email" placeholder="Created By" name="createdBy" value={email} onChange={createdByChangeHandler} disabled={true}/>
         <TextArea placeholder="Charity Description" name="charityDescription" value={charityDescription} onChange={charityDescriptionChangeHandler}/> <br></br>
+        <Input type="text" placeholder="Charity Location" name="charityLocation" value={charityLocation} onChange={charityLocationChangeHandler} disabled={false}/>
         <Input type="number" placeholder={`Current Funding: ${rupiah(currentFunding!)}`} name="currentFunding" value={undefined} onChange={currentFundingChangeHandler} disabled={true}/>
         <Input type="number" placeholder="Target Funding" name="targetFunding" value={undefined} onChange={targetFundingChangeHandler} disabled={false}/>
       </div>

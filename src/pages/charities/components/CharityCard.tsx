@@ -1,6 +1,6 @@
 import { Key } from 'react';
 // import CharityCardTemplate1 from "/charity-card-template-1.svg";
-import CharityCardTemplate1 from "/charity-4.jpg";
+import CharityCardTemplate1 from "/charity-5-medium.jpg";
 // import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 // import { FaWhatsapp } from "react-icons/fa";
 // import { BiDonateHeart } from "react-icons/bi";
@@ -27,7 +27,7 @@ const CharityCard = ({ id, charityName, charityDescription, charityLocation, cre
   // }
 
   return ( 
-    <article className="charity-card border border-neutral-400 shadow-xl rounded-2xl h-full" key={id}>
+    <article className="charity-card border border-neutral-400 shadow-xl h-full" key={id}>
       <div className="charity-img flex justify-center">
         <img className="w-full" src={CharityCardTemplate1} alt="" />
       </div>

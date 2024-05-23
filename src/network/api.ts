@@ -72,20 +72,6 @@ export const Api = {
   },
 
   //CHARITIES DATA
-  // async getCharities(email: string, token: string) {
-  //   try{
-  //     const getCharities = await axios.get(ApiEndpoints.GET_CHARITIES(email), {
-  //       withCredentials: true,
-  //       headers: {
-  //         Authorization: `Bearer ${token}`
-  //       }
-  //     });
-  //     return getCharities;
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // },
-
   async getAllCharities() {
     try {
       const getAllCharities = await axios.get(ApiEndpoints.GET_ALL_CHARITIES, {
@@ -97,6 +83,19 @@ export const Api = {
     }
   },
 
+  async getCharityDetail(charityId: Key) {
+    try {
+      const getCharityDetail = await axios.get(ApiEndpoints.GET_CHARITY_DETAIL(charityId), {
+        withCredentials: false,
+      });
+      return getCharityDetail;
+    } catch (err) {
+      console.error(err);
+      throw err;
+    }
+  },
+
+  //DASHBOARD CHARITIES DATA
   async getOneCharity(email: string, charityId: Key, token: string) {
     try {
       const getOneCharity = await axios.get(ApiEndpoints.GET_ONE_CHARITY(email, charityId), {

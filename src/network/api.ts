@@ -1,5 +1,5 @@
 import { ApiEndpoints } from '../global/api-endpoint';
-import { charityInterface, userCredentials } from '../utils/stateInterfaces';
+import { charityInterface, donationInterface, userCredentials } from '../utils/stateInterfaces';
 
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { Key } from 'react';
@@ -200,6 +200,23 @@ export const Api = {
       });
 
       return deleteCharity;
+    } catch (err) {
+      console.error(err);
+      throw err;
+    }
+  },
+
+  //DONATIONS DATA
+  async createDonation({ donator, donationAmount }: donationInterface, charityId: Key) {
+    try {
+      const createDonation = await axios.post(ApiEndpoints.CREATE_DONATION(charityId), {
+        donator,
+        donationAmount
+      }, {
+        withCredentials: false
+      });
+
+      return createDonation;
     } catch (err) {
       console.error(err);
       throw err;

@@ -13,6 +13,7 @@ import Register from '../pages/register/Index';
 import Dashboard from '../pages/dashboard/Index';
 import CreateCharity from '../pages/createCharity/Index';
 import EditCharity from '../pages/editCharity/Index';
+import Donate from '../pages/donate/Index';
 
 const RouteHandler = () => {
   const router = createBrowserRouter(
@@ -41,6 +42,14 @@ const RouteHandler = () => {
           <Route path=":charityId" element={
             <Suspense fallback={<div>Loading</div>}>
               <CharityDetail />
+            </Suspense>
+          }/>
+        </Route>
+
+        <Route path="donate/">
+          <Route path=":charityId" element={
+            <Suspense fallback={<div>Loading</div>}>
+              <Donate />
             </Suspense>
           }/>
         </Route>

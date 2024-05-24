@@ -1,3 +1,4 @@
+//USER CREDENTIALS
 export interface userCredentials {
   name?: string,
   email: string,
@@ -12,6 +13,7 @@ export interface userCredentialsAction {
   setConfirmPassword: (confirmPassword: userCredentials["confirmPassword"]) => void,
 }
 
+//CHARITIES
 export interface roadmap {
   initiation?: boolean,
   funding?: boolean,
@@ -42,4 +44,15 @@ export interface charityInterfaceAction {
   setRoadmapFunding: (funding: roadmap["funding"]) => void,
   setRoadmapFundingTransfer: (fundingTransfer: roadmap["fundingTransfer"]) => void,
   setRoadmapFinished: (finished: roadmap["finished"]) => void,
+}
+
+//DONATIONS
+export interface donationInterface {
+  donator: string,
+  donationAmount: number,
+}
+
+export interface donationInterfaceAction {
+  setDonator: (donator: donationInterface["donator"]) => void,
+  setDonationAmount: (donationAmount: donationInterface["donationAmount"]) => void
 }

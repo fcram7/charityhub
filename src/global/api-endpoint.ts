@@ -15,4 +15,5 @@ export const ApiEndpoints = {
   CREATE_CHARITY: (email: string) => `${Config.BASE_URL}/charities/${encodeURIComponent(email)}/create-charity`,
   EDIT_CHARITY: (email: string, charityId: Key) => `${Config.BASE_URL}/charities/${encodeURIComponent(email)}/${charityId}/edit-charity`,
   DELETE_CHARITY: (email: string, charityId: Key) => `${Config.BASE_URL}/charities/${encodeURIComponent(email)}/${charityId}/delete-charity`,
+  CREATE_DONATION: (charityId: Key) => `${Config.BASE_URL}/donation/${charityId}`
 }

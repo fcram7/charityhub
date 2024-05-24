@@ -8,14 +8,19 @@ import Cookies from 'js-cookie';
 import Modal from './components/Modal';
 import toast from 'react-hot-toast';
 
-const CharityCardContainer = lazy(() => import("./components/CharityCardContainer"))
+const CharityCardContainer = lazy(() => import("./components/CharityCardContainer"));
+
+interface user {
+  _id: string,
+  name: string,
+}
 
 interface charities {
   _id: Key,
   charity_name: string,
   charity_description: string,
   charity_location: string,
-  created_by: string,
+  created_by: user,
   createdAt: Date,
   current_funding: number,
   target_funding: number,
@@ -123,7 +128,7 @@ const DashboardMain = () => {
                     charityName={charity.charity_name}
                     charityDescription={charity.charity_description}
                     charityLocation={charity.charity_location}
-                    createdBy={charity.created_by}
+                    createdBy={charity.created_by.name}
                     createdAt={showFormattedDate(charity.createdAt)}
                     currentFunding={charity.current_funding}
                     targetFunding={charity.target_funding}
@@ -153,7 +158,7 @@ const DashboardMain = () => {
                     charityName={charity.charity_name}
                     charityDescription={charity.charity_description}
                     charityLocation={charity.charity_location}
-                    createdBy={charity.created_by}
+                    createdBy={charity.created_by.name}
                     createdAt={showFormattedDate(charity.createdAt)}
                     currentFunding={charity.current_funding}
                     targetFunding={charity.target_funding}

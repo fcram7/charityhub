@@ -8,7 +8,7 @@ interface input {
   disabled?: boolean,
   checked?: boolean,
   hidden?: boolean,
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void,
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void | undefined,
 }
 
 const Input = ({ placeholder, type, name, value, disabled, checked, hidden, onChange }: input) => {
@@ -20,7 +20,7 @@ const Input = ({ placeholder, type, name, value, disabled, checked, hidden, onCh
         value={value}
         name={name}
         onChange={onChange}
-        className="form-input px-3 py-4 rounded-xl border border-neutral-500 focus:outline-sky-600"
+        className="form-input px-3 py-4 rounded-xl border border-neutral-500 focus:outline-sky-600 w-full"
         disabled={disabled}
         checked={checked}
         hidden={hidden}

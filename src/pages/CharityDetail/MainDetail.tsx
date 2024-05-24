@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import PageSection from '../../components/PageSection';
 import CharityDetailTemplate1 from "/charity-5-medium.jpg";
 import { Api } from '../../network/api';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import rupiah from '../../utils/priceConverter';
 import CharityDetailMenu from './components/CharityDetailMenu';
 import DetailContent from './components/DetailContent';
@@ -29,6 +29,7 @@ const MainDetail = () => {
   const [storyActive, setStoryActive] = useState(true);
   const [updatesActive, setUpdatesActive] = useState(false);
   const { charityId } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getCharityDetailData = async () => {
@@ -59,12 +60,16 @@ const MainDetail = () => {
     }
   }
 
+  const donateButtonHandler = () => {
+    navigate(`/donate/${charityId}`)
+  }
+
   console.log(charityDetail)
   return ( 
     <PageSection paddingY="py-20" bgColor="bg-slate-200">
       <div className="main-detail-content px-10">
-        { charityDetail && charityDetail.map((charity) => (
-          <div className="">
+        { charityDetail && charityDetail.map((charity, index) => (
+          <div className="" key={index}>
             <div className="mx-6 pt-4 grid grid-cols-[63%_37%] gap-8">
               <div className="left h-[90%]">
                 <img src={CharityDetailTemplate1} alt="Charity Detail" />
@@ -79,7 +84,7 @@ const MainDetail = () => {
                 <div className="location border border-gray-500 w-fit rounded-full px-2 py-1">
                   <p className="text-xs text-gray-500">{charity.charity_location}</p>
                 </div>
-                <button className="mt-4 py-3 border hover:border-violet-700 bg-violet-700 hover:bg-neutral-50 text-neutral-50 hover:text-violet-700 transition-all ease-in-out duration-200 w-[80%] flex items-center gap-2" type="button">
+                <button onClick={donateButtonHandler} className="mt-4 py-3 border hover:border-violet-700 bg-violet-700 hover:bg-neutral-50 text-neutral-50 hover:text-violet-700 transition-all ease-in-out duration-200 w-[80%] flex items-center gap-2" type="button">
                   <span className="text-center w-full text-lg">I want to donate!</span>
                 </button>
               </div>

@@ -4,13 +4,18 @@ import { Api } from '../../network/api';
 import { Key, Suspense, lazy, useEffect, useState } from 'react';
 const CharityCard = lazy(() => import('./components/CharityCard'));
 
+interface user {
+  _id: string,
+  name: string,
+}
+
 
 interface charities {
   _id: Key,
   charity_name: string,
   charity_description: string,
   charity_location: string,
-  created_by: string,
+  created_by: user,
   createdAt: Date,
   current_funding: number,
   target_funding: number,
@@ -51,7 +56,7 @@ const CharitiesList = () => {
                   charityName={charity.charity_name}
                   charityDescription={charity.charity_description}
                   charityLocation={charity.charity_location}
-                  createdBy={charity.created_by}
+                  createdBy={charity.created_by.name}
                   currentFunding={charity.current_funding}
                   targetFunding={charity.target_funding}
                 />

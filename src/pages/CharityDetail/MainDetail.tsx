@@ -7,11 +7,16 @@ import rupiah from '../../utils/priceConverter';
 import CharityDetailMenu from './components/CharityDetailMenu';
 import DetailContent from './components/DetailContent';
 
+interface user {
+  _id: string,
+  name: string,
+}
+
 interface charityDetail {
   charity_name: string,
   charity_description: string,
   charity_location: string,
-  created_by: string,
+  created_by: user,
   createdAt?: Date,
   current_funding: number,
   target_funding: number,
@@ -83,6 +88,9 @@ const MainDetail = () => {
                 </div>
                 <div className="location border border-gray-500 w-fit rounded-full px-2 py-1">
                   <p className="text-xs text-gray-500">{charity.charity_location}</p>
+                </div>
+                <div className="created-by">
+                  <p className="text-slate-600 text-md">{`By: ${charity.created_by.name}`}</p>
                 </div>
                 <button onClick={donateButtonHandler} className="mt-4 py-3 border hover:border-violet-700 bg-violet-700 hover:bg-neutral-50 text-neutral-50 hover:text-violet-700 transition-all ease-in-out duration-200 w-[80%] flex items-center gap-2" type="button">
                   <span className="text-center w-full text-lg">I want to donate!</span>

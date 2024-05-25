@@ -78,7 +78,7 @@ const DonateForm = () => {
       {charityDetail && charityDetail.map((charity, index) => (
         <>
           <div className={`donate-form-content relative ${donateModal ? "opacity-50" : ""}`} key={index}>
-            <h1 className="font-clashGrotesk font-bold text-center lg:text-4xl">Donate to {charity.charity_name}</h1>
+            <h1 className="font-clashGrotesk font-bold text-center sm:text-2xl lg:text-4xl">Donate to {charity.charity_name}</h1>
 
             <div className="donate-form-payment-container mt-12 lg:px-[10%]">
               <div className="donate-form-payment-content bg-slate-100 py-6 px-[3%] border border-slate-500 flex justify-between items-center">
@@ -90,7 +90,7 @@ const DonateForm = () => {
 
                 <div className="donate-payment p-4 w-[50%] grid gap-4">
                   <form className="donation-form" onSubmit={donateButtonHandler}>
-                    <div className="inputs w-[80%] grid gap-4">
+                    <div className="inputs w-full grid gap-8">
                       <Input 
                         type="number"
                         placeholder="Donation amount"

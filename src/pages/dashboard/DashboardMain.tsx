@@ -97,7 +97,7 @@ const DashboardMain = () => {
       toast.success("Successfully deleted charity data!");
       location.reload();
       setCharityToDelete(null);
-      setToggleModal(prevModal => ! prevModal);
+      setToggleModal(prevModal => !prevModal);
     } catch (err) {
       console.error(err);
       return toast.error("ERROR!");

@@ -2,12 +2,20 @@ import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } 
 import RootLayout from './RootLayout';
 import { lazy, Suspense } from 'react';
 
-const Home = lazy(() => import('../pages/home/Index'));
-const ContactUs = lazy(() => import('../pages/contactus/Index'));
-const Charities = lazy(() => import('../pages/charities/Index'));
+// const Home = lazy(() => {
+//   return Promise.all([
+//     import('../pages/home/Index'),
+//     new Promise(resolve => setTimeout(resolve, 2500))
+//   ]).then(([moduleExports]) => moduleExports);
+// });
+// const ContactUs = lazy(() => import('../pages/contactus/Index'));
+// const Charities = lazy(() => import('../pages/charities/Index'));
 const CharityDetail = lazy(() => import('../pages/CharityDetail/Index'));
 
 import NotAuthorized from '../pages/notAuthorized/Index';
+import Home from '../pages/home/Index';
+import Charities from '../pages/charities/Index';
+import ContactUs from '../pages/contactus/Index';
 import Login from '../pages/login/Index';
 import Register from '../pages/register/Index';
 import Dashboard from '../pages/dashboard/Index';
@@ -21,19 +29,13 @@ const RouteHandler = () => {
       <Route path="/" element={<RootLayout />}>
         <Route path="not-authorized" element={<NotAuthorized />}/>
         <Route index element={
-          <Suspense fallback={<div>Loading</div>}>
-            <Home />
-          </Suspense>
+          <Home />
         } />
         <Route path="charities" element={
-          <Suspense fallback={<div>Loading</div>}>
-            <Charities />
-          </Suspense>
+          <Charities />
         } />
         <Route path="contact-us" element={
-          <Suspense fallback={<div>Loading</div>}>
-            <ContactUs />
-          </Suspense>
+          <ContactUs />
         }/>
         <Route path="register" element={<Register />}/>
         <Route path="login" element={<Login />}/>

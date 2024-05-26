@@ -6,6 +6,10 @@ body {
   @apply scroll-smooth
 }
 
+.bar {
+  @apply w-[10vw] h-[105vh] bg-neutral-700
+}
+
 th {
   @apply w-[250px]
 }

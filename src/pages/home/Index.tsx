@@ -3,10 +3,12 @@ import StartCharity from './StartCharity';
 import Hero from './Hero';
 import AboutCharityhub from './AboutCharityhub';
 import CreateDonateCollaborate from './CreateDonateCollaborate';
+import PreLoadingOverlay from '../../components/PreLoadingOverlay';
 
 const Home = () => {
   return ( 
     <>
+      <PreLoadingOverlay overlayText="charityhub."/>
       <Hero />
       <AboutCharityhub />
       <CreateDonateCollaborate />

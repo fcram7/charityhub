@@ -12,9 +12,10 @@ const Hero = () => {
     const context = gsap.context(() => {
       gsap.fromTo('.hero-text', {
         y: 200,
-        opacity: 0    
+        opacity: 0,
       }, {
         y: 0,
+        delay: 2,  
         opacity: 1,
         duration: 1
       });

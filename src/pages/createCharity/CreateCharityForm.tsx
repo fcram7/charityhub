@@ -36,7 +36,9 @@ const CreateCharityForm = () => {
   }
 
   const createdByChangeHandler = () => {
-    setCreatedBy(email!);
+    if(email) {
+      setCreatedBy(email);
+    }
   }
 
   const currentFundingChangeHandler = () => {
@@ -58,19 +60,24 @@ const CreateCharityForm = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    if(!cookies) {
+      return navigate("/not-authorized");
+    }
 
-    try {
-      await Api.createCharitiy({ createdBy, charityName, charityDescription, charityLocation, currentFunding, targetFunding, ongoing, roadmap: { initiation: true, funding: false, fundingTransfer: false, finished: false } }, email!, cookies!);
-
-      toast.success("Successfully created new charity!");
-      navigate(`/${encodeURIComponent(email!)}/dashboard`);
-      setCreatedBy("");
-      setCharityName("");
-      setCharityDescription("");
-      setTargetFunding(0);
-    } catch (err) {
-      console.error(err)
-      return toast.error(`Oops! There's an error ${err}`);
+    if(email) {
+      try {
+        await Api.createCharitiy({ createdBy, charityName, charityDescription, charityLocation, currentFunding, targetFunding, ongoing, roadmap: { initiation: true, funding: false, fundingTransfer: false, finished: false } }, email, cookies);
+  
+        toast.success("Successfully created new charity!");
+        navigate(`/${encodeURIComponent(email)}/dashboard`);
+        setCreatedBy("");
+        setCharityName("");
+        setCharityDescription("");
+        setTargetFunding(0);
+      } catch (err) {
+        console.error(err)
+        return toast.error(`Oops! There's an error ${err}`);
+      }
     }
   }
 

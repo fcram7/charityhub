@@ -15,7 +15,7 @@ import toast from 'react-hot-toast';
 const EditCharityForm = () => {
   const { email, charityId } = useParams();
   const navigate = useNavigate();
-  const token = Cookies.get("session");
+  const cookies = Cookies.get("session");
   const { 
     createdBy,
     charityName,
@@ -57,25 +57,31 @@ const EditCharityForm = () => {
 
 
   useEffect(() => {
-    const getOneCharityData = async () => {
-      try {
-        const charityData = await Api.getOneCharity(email!, charityId!, token!);
-        if(charityData) {
-          setCreatedBy(email!);
-          setCharityName(charityData.data.charity_name);
-          setCharityDescription(charityData.data.charity_description);
-          setCurrentFunding(charityData.data.current_funding);
-          setTargetFunding(charityData.data.target_funding);
-        }
+    if(!cookies) {
+      return navigate("/not-authorized");
+    }
 
-        return charityData;
-      } catch (err) {
-        console.error(err);
+    const getOneCharityData = async () => {
+      if(email && charityId) {
+        try {
+          const charityData = await Api.getOneCharity(email, charityId, cookies);
+          if(charityData) {
+            setCreatedBy(email);
+            setCharityName(charityData.data.charity_name);
+            setCharityDescription(charityData.data.charity_description);
+            setCurrentFunding(charityData.data.current_funding);
+            setTargetFunding(charityData.data.target_funding);
+          }
+  
+          return charityData;
+        } catch (err) {
+          console.error(err);
+        }
       }
     }
 
     getOneCharityData();
-  }, [charityId, email, token, setCreatedBy, setCharityName, setCharityDescription, setCurrentFunding, setTargetFunding]);
+  }, [navigate, charityId, email, cookies, setCreatedBy, setCharityName, setCharityDescription, setCurrentFunding, setTargetFunding]);
 
   const fundingButtonHandler = () => {
     setRoadmapFunding(true);
@@ -93,20 +99,26 @@ const EditCharityForm = () => {
     e.preventDefault();
     e.stopPropagation();
 
-    try {
-      await Api.editCharity({ charityName, charityDescription, targetFunding, roadmap: {initiation, funding, fundingTransfer, finished } }, email!, charityId!, token!);
+    if(!cookies) {
+      return navigate("/not-authorized");
+    }
 
-      toast.success(`Charity ${charityName} edited successfully!`);
-      navigate(`/${encodeURIComponent(email!)}/dashboard`);
-
-      setCreatedBy("");
-      setCharityName("");
-      setCharityDescription("");
-      setCurrentFunding(0);
-      setTargetFunding(0);
-    } catch (err) {
-      console.error(err);
-      return toast.error(`Oops! There's an error ${err}`)
+    if(email && charityId) {
+      try {
+        await Api.editCharity({ charityName, charityDescription, targetFunding, roadmap: {initiation, funding, fundingTransfer, finished } }, email, charityId, cookies);
+  
+        toast.success(`Charity ${charityName} edited successfully!`);
+        navigate(`/${encodeURIComponent(email)}/dashboard`);
+  
+        setCreatedBy("");
+        setCharityName("");
+        setCharityDescription("");
+        setCurrentFunding(0);
+        setTargetFunding(0);
+      } catch (err) {
+        console.error(err);
+        return toast.error(`Oops! There's an error ${err}`)
+      }
     }
   }
 

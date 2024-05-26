@@ -48,24 +48,28 @@ const DashboardMain = () => {
     }
 
     const getOngoingCharitiesData = async () => {
-      try {
-        const ongoingCharitiesData = await Api.getOngoingCharities(email!, cookies!);
-        if(ongoingCharitiesData) {
-          setCharities(ongoingCharitiesData.data);
+      if(email) {
+        try {
+          const ongoingCharitiesData = await Api.getOngoingCharities(email, cookies);
+          if(ongoingCharitiesData) {
+            setCharities(ongoingCharitiesData.data);
+          }
+        } catch (err) {
+          console.error(err);
         }
-      } catch (err) {
-        console.error(err);
       }
     }
 
     const getInactiveCharitiesData = async () => {
-      try {
-        const inactiveCharitiesData = await Api.getInactiveCharities(email!, cookies!);
-        if(inactiveCharitiesData) {
-          setInactiveCharities(inactiveCharitiesData.data);
-        } 
-      } catch (err) {
-        console.error(err);
+      if(email) {
+        try {
+          const inactiveCharitiesData = await Api.getInactiveCharities(email, cookies);
+          if(inactiveCharitiesData) {
+            setInactiveCharities(inactiveCharitiesData.data);
+          } 
+        } catch (err) {
+          console.error(err);
+        }
       }
     }
 
@@ -74,11 +78,15 @@ const DashboardMain = () => {
   }, [email, cookies, navigate]);
 
   const addCharityButtonHandler = () => {
-    navigate(`/${encodeURIComponent(email!)}/create-charity`);
+    if(email) {
+      navigate(`/${encodeURIComponent(email)}/create-charity`);
+    }
   }
 
   const editCharityButtonHandler = (_id: Key) => {
-    navigate(`/${encodeURIComponent(email!)}/${_id}/edit-charity`);
+    if(email) {
+      navigate(`/${encodeURIComponent(email)}/${_id}/edit-charity`);
+    }
   }
 
   const deleteCharityButtonHandler = (id: Key) => {
@@ -92,16 +100,18 @@ const DashboardMain = () => {
   }
 
   const deleteModalButtonHandler = async (id: Key) => {
-    try {
-      await Api.deleteCharity(email!, id, cookies!);
-      toast.success("Successfully deleted charity data!");
-      location.reload();
-      setCharityToDelete(null);
-      setToggleModal(prevModal => !prevModal);
-    } catch (err) {
-      console.error(err);
-      return toast.error("ERROR!");
-    }
+    if(email && cookies) {
+      try {
+        await Api.deleteCharity(email, id, cookies);
+        toast.success("Successfully deleted charity data!");
+        location.reload();
+        setCharityToDelete(null);
+        setToggleModal(prevModal => !prevModal);
+      } catch (err) {
+        console.error(err);
+        return toast.error("ERROR!");
+      }
+    } 
   }
 
   console.log(toggleModal, charityToDelete);

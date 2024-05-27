@@ -1,7 +1,7 @@
 import PageSection from '../../components/PageSection';
 
 import { gsap } from 'gsap';
-import ScrollTrigger from 'gsap';
+import { ScrollTrigger } from 'gsap/all';
 import { useRef, useLayoutEffect } from 'react';
 
 const CreateDonateCollaborate = () => {

@@ -16,7 +16,7 @@ const Socials = () => {
         scrollTrigger: {
           trigger: '.socials-section-title',
           start: 'top 85%',
-          end: 'bottom 55%',
+          end: 'bottom 25%',
           markers: false,
           scrub: 1
         },

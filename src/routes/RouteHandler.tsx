@@ -2,12 +2,6 @@ import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } 
 import RootLayout from './RootLayout';
 import { lazy, Suspense } from 'react';
 
-// const Home = lazy(() => {
-//   return Promise.all([
-//     import('../pages/home/Index'),
-//     new Promise(resolve => setTimeout(resolve, 2500))
-//   ]).then(([moduleExports]) => moduleExports);
-// });
 // const ContactUs = lazy(() => import('../pages/contactus/Index'));
 // const Charities = lazy(() => import('../pages/charities/Index'));
 const CharityDetail = lazy(() => import('../pages/CharityDetail/Index'));

@@ -1,7 +1,7 @@
 import PageSection from '../../components/PageSection';
 import { Api } from '../../network/api';
-// import CharityCard from './components/CharityCard';
 import { Key, Suspense, lazy, useEffect, useState } from 'react';
+
 const CharityCard = lazy(() => import('./components/CharityCard'));
 
 interface user {

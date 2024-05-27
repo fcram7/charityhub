@@ -3,7 +3,7 @@ import PageSection from '../../components/PageSection';
 import About1 from "/about-1.png";
 
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/all';
+import ScrollTrigger from 'gsap';
 
 const AboutCharityhub = () => {
   gsap.registerPlugin(ScrollTrigger);

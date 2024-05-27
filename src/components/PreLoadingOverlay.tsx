@@ -1,4 +1,4 @@
-import { gsap } from 'gsap';
+import gsap from 'gsap';
 import { useLayoutEffect } from 'react';
 import { preLoadOverlayStore } from '../zustand/preloadOverlayAnimation';
 

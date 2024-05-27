@@ -1,7 +1,7 @@
 import SocialsMarquee from './components/SocialsMarquee';
 
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/all';
+import ScrollTrigger from 'gsap';
 import { useLayoutEffect } from 'react';
 
 const Socials = () => {

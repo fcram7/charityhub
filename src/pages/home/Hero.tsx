@@ -15,7 +15,7 @@ const Hero = () => {
         opacity: 0,
       }, {
         y: 0,
-        delay: 2,  
+        delay: 2.3,  
         opacity: 1,
         duration: 1
       });

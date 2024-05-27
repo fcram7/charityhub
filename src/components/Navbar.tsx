@@ -6,12 +6,21 @@ import Cookies from 'js-cookie';
 import NavLink from './NavLink';
 import { Api } from '../network/api';
 import Button from './Button';
+import { preLoadOverlayStore } from '../zustand/preloadOverlayAnimation';
 
 const Navbar = () => {
   const [menuActive, setMenuActive] = useState(false);
   const navigate = useNavigate();
   const cookie = Cookies.get("session");
   const location = useLocation();
+
+  const { headerMenuClicked, setHeaderMenuClicked } = preLoadOverlayStore();
+
+  const handleMenuClick = () => {
+    setHeaderMenuClicked(true);
+  }
+
+  console.log(headerMenuClicked)
 
   useEffect(() => {
     setMenuActive(false);
@@ -41,16 +50,16 @@ const Navbar = () => {
         <ul className={`navbar-links inline-block text-neutral-700 bg-slate-200 text-lg absolute z-[99] w-full top-20 left-0 pt-4 lg:pt-1 px-[7%] max-lg:h-[100vh] transform transition-transform duration-200 ease-in-out ${menuActive ? "translate-x-0" : "translate-x-full"} lg:static flex flex-col gap-4 lg:gap-0 lg:w-fit lg:justify-end lg:items-end lg:translate-x-0 lg:px-0`}>
           { !cookie ? (
             <>
-              <NavLink link="/">Home</NavLink>
-              <NavLink link="/charities">Charities</NavLink>
-              <NavLink link="/contact-us">Contact Us</NavLink>
-              <NavLink link="/login">Login</NavLink>
+              <NavLink onClick={handleMenuClick} link="/">Home</NavLink>
+              <NavLink onClick={handleMenuClick} link="/charities">Charities</NavLink>
+              <NavLink onClick={handleMenuClick} link="/contact-us">Contact Us</NavLink>
+              <NavLink onClick={handleMenuClick} link="/login">Login</NavLink>
             </>
           ) : (
             <>
-              <NavLink link="/">Home</NavLink>
-              <NavLink link="/charities">Charities</NavLink>
-              <NavLink link="/contact-us">Contact Us</NavLink>
+              <NavLink onClick={handleMenuClick} link="/">Home</NavLink>
+              <NavLink onClick={handleMenuClick} link="/charities">Charities</NavLink>
+              <NavLink onClick={handleMenuClick} link="/contact-us">Contact Us</NavLink>
               <Button type="button" onClick={logoutHandler} text="Logout"/>
             </>
           )}

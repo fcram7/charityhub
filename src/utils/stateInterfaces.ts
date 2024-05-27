@@ -56,3 +56,14 @@ export interface donationInterfaceAction {
   setDonator: (donator: donationInterface["donator"]) => void,
   setDonationAmount: (donationAmount: donationInterface["donationAmount"]) => void
 }
+
+//PRELOAD OVERLAY ANIMATION
+export interface preloadAnimationInterface {
+  websiteOpen: boolean,
+  headerMenuClicked: boolean
+}
+
+export interface preloadAnimationInterfaceAction {
+  setWebsiteOpen: (websiteOpen: preloadAnimationInterface["websiteOpen"]) => void,
+  setHeaderMenuClicked: (headerMenuClicked: preloadAnimationInterface["headerMenuClicked"]) => void,
+}

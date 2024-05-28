@@ -27,11 +27,20 @@ const RouteHandler = () => {
         <Route index element={
           <Home />
         } />
-        <Route path="charities" element={
-          <Suspense fallback={<div className="bg-slate-200"></div>}>
-            <Charities />
-          </Suspense>
-        } />
+
+        <Route path="charities/">
+          <Route path="" element={
+            <Suspense fallback={<div className="bg-slate-200"></div>}>
+              <Charities />
+            </Suspense>
+          }/>
+          <Route path=":charityId" element={
+            <Suspense fallback={<div>Loading</div>}>
+              <CharityDetail />
+            </Suspense>
+          }/>
+        </Route>
+
         <Route path="contact-us" element={
           <Suspense fallback={<div className="bg-slate-200"></div>}>
             <ContactUs />
@@ -47,14 +56,6 @@ const RouteHandler = () => {
             <Login />
           </Suspense>
         }/>
-
-        <Route path="charity/">
-          <Route path=":charityId" element={
-            <Suspense fallback={<div>Loading</div>}>
-              <CharityDetail />
-            </Suspense>
-          }/>
-        </Route>
 
         <Route path="donate/">
           <Route path=":charityId" element={

@@ -2,10 +2,17 @@ import UpdatesContent from './UpdatesContent';
 
 interface detailContent {
   story: boolean,
-  updates: boolean
+  updates: boolean,
+  index: number,
+  roadmap?: {
+    initiation?: boolean,
+    funding?: boolean,
+    fundingTransfer?: boolean,
+    finished?: boolean
+  }
 }
 
-const DetailContent = ({ story, updates }: detailContent) => {
+const DetailContent = ({ story, updates, index, roadmap }: detailContent) => {
   if(story) {
     return ( 
       <div className="description-detail">
@@ -25,8 +32,24 @@ const DetailContent = ({ story, updates }: detailContent) => {
       <div className="description-detail mt-6">
         <h2 className="lg:text-3xl">Updates</h2>
         <div className="charity-updates mt-6 px-24 grid gap-10">
-          <UpdatesContent updateNumber={1} updateName="Initiation"/>
-          <UpdatesContent updateNumber={2} updateName="Funding"/>
+          { 
+            roadmap && (
+              <>
+                {
+                  roadmap.initiation && <UpdatesContent updateNumber={index + 1} updateName="Initiation"/>
+                }
+                {
+                  roadmap.funding && <UpdatesContent updateNumber={index + 2} updateName="Funding"/>
+                }
+                {
+                  roadmap.fundingTransfer && <UpdatesContent updateNumber={index + 3} updateName="Funding Transfer"/>
+                }
+                {
+                  roadmap.finished && <UpdatesContent updateNumber={index + 4} updateName="Finished"/>
+                }
+              </>
+            )
+          }
         </div>
       </div>
     );

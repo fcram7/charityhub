@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState, useRef } from 'react';
 import { RxHamburgerMenu, RxCross1 } from "react-icons/rx";
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import Cookies from 'js-cookie';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/all';
 import NavLink from './NavLink';
 import { Api } from '../network/api';
 import { preLoadOverlayStore } from '../zustand/preloadOverlayAnimation';
@@ -11,7 +13,9 @@ const Navbar = () => {
   const [menuActive, setMenuActive] = useState(false);
   const navigate = useNavigate();
   const cookie = Cookies.get("session");
-  const location = useLocation();
+  const navRef = useRef(null);
+
+  gsap.registerPlugin(ScrollTrigger);
 
   const { headerMenuClicked, setHeaderMenuClicked } = preLoadOverlayStore();
 
@@ -19,11 +23,38 @@ const Navbar = () => {
     setHeaderMenuClicked(true);
   }
 
-  console.log(headerMenuClicked)
+  console.log(headerMenuClicked);
+
+  useLayoutEffect(() => {
+    const navbar = navRef.current;
+
+    let lastScrollTop = 0;
+    const handleScroll = () => {
+      const st = window.scrollY || document.documentElement.scrollTop;
+
+      if(st > lastScrollTop) {
+        gsap.to(navbar, {
+          y: "-100%",
+          duration: 0.3,
+        });
+      } else {
+        gsap.to(navbar, {
+          y: "0",
+          duration: 0.5
+        })
+      }
+
+      lastScrollTop = st <= 0 ? 0 : st;
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, []);
 
   useEffect(() => {
     setMenuActive(false);
-  }, [location])
+  }, []);
 
   const hamburgerButtonHandler = () => {
     setMenuActive(prevMenu => !prevMenu);
@@ -42,7 +73,7 @@ const Navbar = () => {
     }
 
   return ( 
-    <header className={`navbar-section ${menuActive ? "" : "overflow-hidden"} border-b-4 lg:border-b-2 border-slate-950 z-50 bg-slate-200`}>
+    <header ref={navRef} className={`navbar-section fixed w-full ${menuActive ? "" : "overflow-hidden"} border-b-4 lg:border-b-2 border-slate-950 z-50 bg-slate-200`}>
       <nav className="navbar relative flex py-6 px-[7%] lg:px-[2%] lg:py-1 h-full justify-between items-center">
         <Link to="/" className="navbar-logo font-normal text-2xl lg:text-3xl text-neutral-700 font-neueMontreal">charity<span>hub.</span></Link>
 

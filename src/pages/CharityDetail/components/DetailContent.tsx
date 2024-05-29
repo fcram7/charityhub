@@ -4,6 +4,7 @@ interface detailContent {
   story: boolean,
   updates: boolean,
   index: number,
+  charityDescription: string,
   roadmap?: {
     initiation?: boolean,
     funding?: boolean,
@@ -12,16 +13,13 @@ interface detailContent {
   }
 }
 
-const DetailContent = ({ story, updates, index, roadmap }: detailContent) => {
+const DetailContent = ({ story, updates, index, charityDescription, roadmap }: detailContent) => {
   if(story) {
     return ( 
       <div className="description-detail">
         <h2 className="lg:text-3xl">Story</h2>
         <p className="charity-description mt-6">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste harum fugit repudiandae 
-          ratione dolorem est minus in mollitia cumque eaque quo nihil obcaecati nesciunt inventore asperiores, optio facere officiis 
-          dignissimos rerum autem! Eligendi placeat cupiditate ratione modi minima consectetur aspernatur itaque, laborum repellat 
-          impedit reprehenderit at voluptatum laudantium, repudiandae nulla.
+          {charityDescription}
         </p>
       </div>
     );

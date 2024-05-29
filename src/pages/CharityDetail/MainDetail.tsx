@@ -97,17 +97,14 @@ const MainDetail = () => {
                 </button>
               </div>
             </div>
-            <div className="charity-story mt-4 border-t-2 border-slate-400 grid gap-8 py-4 mx-6">
+            <div className="charity-story mt-4 border-t-2 border-slate-400 grid gap-8 mx-6 relative">
               <CharityDetailMenu
                 storyActive={storyActive}
                 updatesActive={updatesActive}
                 storyActiveChangeHandler={() => storyActiveChangeHandler("Story")}
                 updatesActiveChangeHandler={() => updatesActiveChangeHandler("Updates")}
               />
-              <DetailContent story={storyActive} updates={updatesActive} index={index} roadmap={charity.roadmap}/>
-              {/* <h2 className="lg:text-3xl">Story</h2>
-              <p className="charity-description">{charity.charity_description}</p>
-              <p className="charity-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste harum fugit repudiandae ratione dolorem est minus in mollitia cumque eaque quo nihil obcaecati nesciunt inventore asperiores, optio facere officiis dignissimos rerum autem! Eligendi placeat cupiditate ratione modi minima consectetur aspernatur itaque, laborum repellat impedit reprehenderit at voluptatum laudantium, repudiandae nulla.</p> */}
+              <DetailContent story={storyActive} updates={updatesActive} index={index} roadmap={charity.roadmap} charityDescription={charity.charity_description}/>
             </div>
           </div>
         ))}

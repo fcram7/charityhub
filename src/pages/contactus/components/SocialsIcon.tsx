@@ -8,9 +8,9 @@ interface socialsIcon {
 const SocialsIcon = ({ icon, styles }: socialsIcon) => {
   return ( 
     <div className={styles}>
-      <a href="#">
+      <div>
         {icon}
-      </a>
+      </div>
     </div>
    );
 }

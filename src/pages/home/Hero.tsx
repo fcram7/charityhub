@@ -40,7 +40,7 @@ const Hero = () => {
   }, [hover])
   
   return ( 
-    <section className="hero-section relative px-[5%] lg:px-[2%] py-36 bg-slate-200">
+    <section className="hero-section relative px-[5%] lg:px-[2%] py-48 bg-slate-200">
       <div className="section-content relative flex">
         <div className="hero-texts flex flex-col gap-6 w-full overflow-hidden">
           <h1 className="hero-text text-5xl sm:text-6xl lg:text-8xl font-redhatdisplay ">Share <span onMouseEnter={hoverHandler} onMouseLeave={hoverHandler} className="small-text text-3xl">with people</span>,</h1>

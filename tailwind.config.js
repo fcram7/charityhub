@@ -11,6 +11,7 @@ export default {
         instrument: ['"Instrument Serif"', "serif"],
         redhatdisplay: ['"Red Hat Display"', "sans-serif"],
         clashGrotesk: ['"Clash Grotesk"', "sans-serif"],
+        neueMontreal: ['"Neue Montreal"', "sans-serif"]
       }
     },
   },

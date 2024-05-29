@@ -5,7 +5,6 @@ import toast from 'react-hot-toast';
 import Cookies from 'js-cookie';
 import NavLink from './NavLink';
 import { Api } from '../network/api';
-import Button from './Button';
 import { preLoadOverlayStore } from '../zustand/preloadOverlayAnimation';
 
 const Navbar = () => {
@@ -45,9 +44,9 @@ const Navbar = () => {
   return ( 
     <header className={`navbar-section ${menuActive ? "" : "overflow-hidden"} border-b-4 lg:border-b-2 border-slate-950 z-50 bg-slate-200`}>
       <nav className="navbar relative flex py-6 px-[7%] lg:px-[2%] lg:py-1 h-full justify-between items-center">
-        <Link to="/" className="navbar-logo font-semibold text-2xl lg:text-3xl text-neutral-700">charity<span>hub.</span></Link>
+        <Link to="/" className="navbar-logo font-normal text-2xl lg:text-3xl text-neutral-700 font-neueMontreal">charity<span>hub.</span></Link>
 
-        <ul className={`navbar-links inline-block text-neutral-700 bg-slate-200 text-lg absolute z-[99] w-full top-20 left-0 pt-4 lg:pt-1 px-[7%] max-lg:h-[100vh] transform transition-transform duration-200 ease-in-out ${menuActive ? "translate-x-0" : "translate-x-full"} lg:static flex flex-col gap-4 lg:gap-0 lg:w-fit lg:justify-end lg:items-end lg:translate-x-0 lg:px-0`}>
+        <ul className={`navbar-links inline-block text-neutral-700 bg-slate-200 text-lg absolute z-[99] w-full top-20 left-0 pt-4 lg:pt-1 px-[7%] max-lg:h-[100vh] transform transition-transform duration-200 ease-in-out ${menuActive ? "translate-x-0" : "translate-x-full"} lg:static flex gap-4 lg:gap-6 lg:w-fit lg:justify-end lg:items-end lg:translate-x-0 lg:px-0`}>
           { !cookie ? (
             <>
               <NavLink onClick={handleMenuClick} link="/">Home</NavLink>
@@ -60,7 +59,8 @@ const Navbar = () => {
               <NavLink onClick={handleMenuClick} link="/">Home</NavLink>
               <NavLink onClick={handleMenuClick} link="/charities">Charities</NavLink>
               <NavLink onClick={handleMenuClick} link="/contact-us">Contact Us</NavLink>
-              <Button type="button" onClick={logoutHandler} text="Logout"/>
+              <NavLink onClick={logoutHandler} link="/">Logout</NavLink>
+              {/* <Button type="button" onClick={logoutHandler} text="Logout"/> */}
             </>
           )}
         </ul>

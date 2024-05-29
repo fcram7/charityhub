@@ -31,7 +31,7 @@ const Email = () => {
     return () => context.revert();
   }, []);
   return ( 
-    <section className="email-contact-section px-[5%] lg:px-[2%] py-40 bg-slate-200">
+    <section className="email-contact-section px-[5%] lg:px-[2%] py-52 bg-slate-200">
       <div className="section-title flex justify-center">
         <h1 className="contact font-clashGrotesk text-7xl sm:text-9xl lg:text-[14rem] font-bold">C</h1>
         <h1 className="contact font-clashGrotesk text-7xl sm:text-9xl lg:text-[14rem] font-bold">o</h1>

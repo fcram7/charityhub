@@ -33,7 +33,7 @@ const Hero = () => {
     return () => context.revert();
   }, [])
   return ( 
-    <PageSection bgColor="bg-slate-200" paddingY="py-24">
+    <PageSection bgColor="bg-slate-200" paddingY="py-40">
       <div className="charities-section-titles flex flex-col items-center gap-4">
         <div className="charities-section-title flex justify-center">
           <h1 className="charities font-clashGrotesk font-bold text-center lg:text-[14rem]">C</h1>

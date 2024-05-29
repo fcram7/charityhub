@@ -30,7 +30,7 @@ const CharityCard = ({ id, charityName, charityDescription, charityLocation, cre
         <Link to={`/charities/${id}`}>
           <h1 className="text-3xl transition-all ease-in-out duration-300 hover:text-slate-500">{charityName}</h1>
         </Link>
-        <p>{charityDescription}</p>
+        <p>{charityDescription.substring(0, 200)}...</p>
         <div className="kickstarter flex flex-col justify-center gap-3">
           <p>by: {createdBy}</p>
           <div className="location border border-gray-500 w-fit rounded-full px-2 py-1">

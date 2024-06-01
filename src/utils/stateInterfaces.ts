@@ -13,6 +13,15 @@ export interface userCredentialsAction {
   setConfirmPassword: (confirmPassword: userCredentials["confirmPassword"]) => void,
 }
 
+//ACCESS TOKEN
+export interface token {
+  token?: string,
+}
+
+export interface tokenAction {
+  setToken: (token: token["token"]) => void,
+}
+
 //CHARITIES
 export interface roadmap {
   initiation?: boolean,

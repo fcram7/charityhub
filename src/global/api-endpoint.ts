@@ -6,6 +6,7 @@ export const ApiEndpoints = {
   REGISTER: `${Config.BASE_URL}/register`,
   LOGIN: `${Config.BASE_URL}/login`,
   LOGOUT: `${Config.BASE_URL}/logout`,
+  REFRESH_TOKEN: `${Config.BASE_URL}/token`,
   GET_ALL_CHARITIES: `${Config.BASE_URL}/charities`,
   GET_CHARITY_DETAIL: (charityId: Key) => `${Config.BASE_URL}/charities/${charityId}`,
   GET_CHARITIES: (email: string) => `${Config.BASE_URL}/charities/${encodeURIComponent(email)}/`,

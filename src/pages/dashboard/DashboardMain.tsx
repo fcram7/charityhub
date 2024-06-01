@@ -1,12 +1,15 @@
 import { Api } from '../../network/api';
 import Button from '../../components/Button';
 import { showFormattedDate } from '../../utils/dateFormatter';
+import { tokenStore } from '../../zustand/accessToken';
 
 import { useNavigate, useParams } from 'react-router-dom';
 import { Key, Suspense, lazy, useEffect, useState } from 'react';
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
 import Modal from './components/Modal';
 import toast from 'react-hot-toast';
+import { jwtDecode } from 'jwt-decode';
+import axios from 'axios';
 
 const CharityCardContainer = lazy(() => import("./components/CharityCardContainer"));
 
@@ -35,22 +38,54 @@ interface charities {
 
 const DashboardMain = () => {
   const { email } = useParams();
+  const { token, setToken } = tokenStore();
+  const [expire, setExpire] = useState<number | null | undefined>(null);
   const [charities, setCharities ] = useState<charities[] | null>(null);
   const [inactiveCharities, setInactiveCharities] = useState<charities[] | null>(null);
   const [toggleModal, setToggleModal] = useState(false);
   const [charityToDelete, setCharityToDelete] = useState<Key | null>(null)
-  const cookies = Cookies.get("session");
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    if(!cookies) {
-      return navigate("/not-authorized");
+    const refreshToken = async () => {
+      try {
+        const newToken = await Api.newAccessToken();
+        if(newToken) {
+          setToken(newToken.data.accessToken);
+          const decodedToken = jwtDecode(newToken.data.accessToken);
+          setExpire(decodedToken.exp);
+        }
+      } catch (err) {
+        console.error(err);
+      }
     }
 
+    const instance = axios.create();
+
+    instance.interceptors.request.use(async (config) => {
+      const currentDate = new Date();
+
+      if(expire! * 1000 < currentDate.getTime()) {
+        const newToken = await Api.newAccessToken();
+        if(newToken) {
+          config.headers.Authorization = `Bearer ${newToken.data.accessToken}`
+          setToken(newToken.data.accessToken);
+          const decodedToken = jwtDecode(newToken.data.accessToken);
+          setExpire(decodedToken.exp);
+        }
+      }
+
+      return config;
+    }, (error) => {
+      return Promise.reject(error);
+    });
+    
+
     const getOngoingCharitiesData = async () => {
-      if(email) {
+      if(email && token) {
         try {
-          const ongoingCharitiesData = await Api.getOngoingCharities(email, cookies);
+          const ongoingCharitiesData = await Api.getOngoingCharities(email, token);
           if(ongoingCharitiesData) {
             setCharities(ongoingCharitiesData.data);
           }
@@ -61,9 +96,9 @@ const DashboardMain = () => {
     }
 
     const getInactiveCharitiesData = async () => {
-      if(email) {
+      if(email && token) {
         try {
-          const inactiveCharitiesData = await Api.getInactiveCharities(email, cookies);
+          const inactiveCharitiesData = await Api.getInactiveCharities(email, token);
           if(inactiveCharitiesData) {
             setInactiveCharities(inactiveCharitiesData.data);
           } 
@@ -73,9 +108,13 @@ const DashboardMain = () => {
       }
     }
 
+    refreshToken();
     getOngoingCharitiesData();
     getInactiveCharitiesData();
-  }, [email, cookies, navigate]);
+  }, [email, token, expire, navigate, setToken]);
+
+  console.log(token)
+
 
   const addCharityButtonHandler = () => {
     if(email) {
@@ -100,9 +139,9 @@ const DashboardMain = () => {
   }
 
   const deleteModalButtonHandler = async (id: Key) => {
-    if(email && cookies) {
+    if(email && token) {
       try {
-        await Api.deleteCharity(email, id, cookies);
+        await Api.deleteCharity(email, id, token);
         toast.success("Successfully deleted charity data!");
         location.reload();
         setCharityToDelete(null);
@@ -114,9 +153,7 @@ const DashboardMain = () => {
     } 
   }
 
-  console.log(toggleModal, charityToDelete);
 
-  console.log(charities);
   
   return ( 
     <>

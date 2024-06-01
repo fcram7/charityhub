@@ -1,6 +1,5 @@
 import { ChangeEvent, FormEvent } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import Cookies from "js-cookie";
 
 import CharityFormContainer from '../../components/CharityFormContainer';
 import Input from '../../components/Input';
@@ -11,6 +10,8 @@ import Button from '../../components/Button';
 import { Api } from '../../network/api';
 import toast from 'react-hot-toast';
 import BackToDashboard from '../../components/BackToDashboard';
+import { tokenStore } from '../../zustand/accessToken';
+// import { withRefreshToken } from '../../utils/withRefreshToken';
 
 const CreateCharityForm = () => {
   const { 
@@ -28,7 +29,7 @@ const CreateCharityForm = () => {
     setCreatedBy,
   } = charitiesAuthStore();
   const { email } = useParams();
-  const cookies = Cookies.get("session");
+  const { token } = tokenStore();
   const navigate = useNavigate();
 
   const charityNameChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -60,13 +61,13 @@ const CreateCharityForm = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if(!cookies) {
+    if(!token) {
       return navigate("/not-authorized");
     }
 
     if(email) {
       try {
-        await Api.createCharitiy({ createdBy, charityName, charityDescription, charityLocation, currentFunding, targetFunding, ongoing, roadmap: { initiation: true, funding: false, fundingTransfer: false, finished: false } }, email, cookies);
+        await Api.createCharitiy({ createdBy, charityName, charityDescription, charityLocation, currentFunding, targetFunding, ongoing, roadmap: { initiation: true, funding: false, fundingTransfer: false, finished: false } }, email, token);
   
         toast.success("Successfully created new charity!");
         navigate(`/${encodeURIComponent(email)}/dashboard`);

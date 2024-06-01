@@ -60,7 +60,7 @@ export const Api = {
 
   async logout() {
     try {
-      const logout = await axios.post(ApiEndpoints.LOGOUT, {}, {
+      const logout = await axios.delete(ApiEndpoints.LOGOUT, {
         withCredentials: true
       });
 
@@ -68,6 +68,19 @@ export const Api = {
     } catch (err) {
       console.error(err);
       throw err;
+    }
+  },
+
+  //REFRESH TOKEN
+  async newAccessToken() {
+    try {
+      const newAccessToken = await axios.get(ApiEndpoints.REFRESH_TOKEN, {
+        withCredentials: true
+      });
+
+      return newAccessToken;
+    } catch (err) {
+      console.error(err);
     }
   },
 

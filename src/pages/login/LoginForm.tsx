@@ -1,12 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
 import { ChangeEvent, FormEvent } from "react";
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
 import { userAuthStore } from "../../zustand/auth";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import { Api } from "../../network/api";
 import toast from "react-hot-toast";
 import AuthFormContainer from "../../components/AuthFormContainer";
+import { tokenStore } from '../../zustand/accessToken';
 
 interface AxiosError extends Error {
   response?: {
@@ -16,6 +17,7 @@ interface AxiosError extends Error {
 
 const LoginForm = () => {
   const { email, password, setEmail, setPassword } = userAuthStore();
+  const  { setToken } = tokenStore();
   const navigate = useNavigate();
 
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -33,15 +35,18 @@ const LoginForm = () => {
     console.log(email, password);
 
     try {
-      await Api.login({ email, password });
-      const cookies = Cookies.get("session");
+      const login = await Api.login({ email, password });
+      // const cookies = Cookies.get("session");
       setTimeout(() => {
-        if(cookies) {
-          navigate(`/${encodeURIComponent(email)}/dashboard`);
-          toast.success("Logged in successfully!");
-        } else {
-          navigate("/not-authorized");
-        }
+        // if(cookies) {
+        //   navigate(`/${encodeURIComponent(email)}/dashboard`);
+        //   toast.success("Logged in successfully!");
+        // } else {
+        //   navigate("/not-authorized");
+        // }
+        setToken(login.data.accessToken);
+        navigate(`/${encodeURIComponent(email)}/dashboard`);
+        toast.success("Logged in successfully!");
         setEmail("");
         setPassword("");
       }, 100)

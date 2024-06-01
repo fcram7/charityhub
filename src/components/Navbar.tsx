@@ -2,17 +2,19 @@ import { useEffect, useLayoutEffect, useState, useRef } from 'react';
 import { RxHamburgerMenu, RxCross1 } from "react-icons/rx";
 import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/all';
 import NavLink from './NavLink';
 import { Api } from '../network/api';
 import { preLoadOverlayStore } from '../zustand/preloadOverlayAnimation';
+import { tokenStore } from '../zustand/accessToken';
 
 const Navbar = () => {
   const [menuActive, setMenuActive] = useState(false);
   const navigate = useNavigate();
-  const cookie = Cookies.get("session");
+  // const cookie = Cookies.get("session");
+  const { token, setToken } = tokenStore();
   const navRef = useRef(null);
 
   gsap.registerPlugin(ScrollTrigger);
@@ -63,6 +65,7 @@ const Navbar = () => {
   const logoutHandler = async () => {
     await Api.logout()
       .then(() => {
+        setToken("");
         navigate("/");
         return toast.success("Successfully Logged Out");
       })
@@ -78,7 +81,7 @@ const Navbar = () => {
         <Link to="/" className="navbar-logo font-normal text-2xl lg:text-3xl text-neutral-700 font-neueMontreal">charity<span>hub.</span></Link>
 
         <ul className={`navbar-links inline-block text-neutral-700 bg-slate-200 text-lg absolute z-[99] w-full top-20 left-0 pt-4 lg:pt-1 px-[7%] max-lg:h-[100vh] transform transition-transform duration-200 ease-in-out ${menuActive ? "translate-x-0" : "translate-x-full"} lg:static flex gap-4 lg:gap-6 lg:w-fit lg:justify-end lg:items-end lg:translate-x-0 lg:px-0`}>
-          { !cookie ? (
+          { !token ? (
             <>
               <NavLink onClick={handleMenuClick} link="/">Home</NavLink>
               <NavLink onClick={handleMenuClick} link="/charities">Charities</NavLink>

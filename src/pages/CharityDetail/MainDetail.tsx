@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import PageSection from '../../components/PageSection';
 import CharityDetailTemplate1 from "/charity-5-medium.jpg";
 import { Api } from '../../network/api';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import rupiah from '../../utils/priceConverter';
 import CharityDetailMenu from './components/CharityDetailMenu';
 import DetailContent from './components/DetailContent';
+import { preLoadOverlayStore } from '../../zustand/preloadOverlayAnimation';
 
 interface user {
   _id: string,
@@ -35,6 +36,11 @@ const MainDetail = () => {
   const [updatesActive, setUpdatesActive] = useState(false);
   const { charityId } = useParams();
   const navigate = useNavigate();
+  const { setHeaderMenuClicked } = preLoadOverlayStore();
+
+  const handleBackToDashboardClick = () => {
+    setHeaderMenuClicked(true);
+  }
 
   useEffect(() => {
     const getCharityDetailData = async () => {
@@ -72,6 +78,9 @@ const MainDetail = () => {
   console.log(charityDetail)
   return ( 
     <PageSection paddingY="py-20" bgColor="bg-slate-200">
+      <div className="back-to-dashboard my-6 text-xl text-violet-500" onClick={handleBackToDashboardClick}>
+        <Link to="/charities">&larr; Back to charities list</Link>
+      </div>
       <div className="main-detail-content px-10">
         { charityDetail && charityDetail.map((charity, index) => (
           <div className="" key={index}>

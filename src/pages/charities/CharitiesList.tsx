@@ -48,7 +48,7 @@ const CharitiesList = () => {
   return ( 
     <PageSection paddingY="py-32" bgColor="bg-slate-200">
         <Suspense fallback={<div>Loading</div>} >
-          <div className="charity-content px-20 grid gap-8 lg:grid-cols-3">
+          <div className="charity-content px-20 grid gap-14">
             { charities && charities.map((charity, index) => (
                 <CharityCard
                   key={index}
